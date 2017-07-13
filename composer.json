@@ -1,8 +1,6 @@
 {
-    "name": "symfony/skeleton",
     "type": "project",
     "license": "proprietary",
-    "description": "Project description",
     "require": {
         "php": "^7.1.3",
         "symfony/flex": "^1.0",
@@ -47,7 +45,7 @@
     },
     "extra": {
         "symfony": {
-            "id": "01BMXS5FETEN1GHXASN6DF3Q6S",
+            "id": "01BMY5B3836TYHRB3WARKNXQMS",
             "allow-contrib": false
         }
     }
