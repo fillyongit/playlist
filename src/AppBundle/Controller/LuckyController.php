@@ -18,6 +18,10 @@ class LuckyController extends Controller
 // 				'<html><body>Lucky number: '.$number.'</body></html>'
 // 				);
 
+		$mailhook = new \Ingenerator\Mailhook\Mailhook('/var/log/mail.log');
+		
+		$mails = $mailhook->getEmails();
+
 		return $this->render('lucky/number.html.twig', array(
 				'number' => $number,
 		));
