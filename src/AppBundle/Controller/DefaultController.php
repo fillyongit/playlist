@@ -24,6 +24,9 @@ class DefaultController extends Controller
      */
     public function listAction($what = 'artists')
     {
+    	$logger = $this->container->get('logger');
+    	$logger->info('listAction -> ' . $what);
+    	
     	// replace this example code with whatever you need
     	return $this->render('default/list.html.twig', [
     		'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,

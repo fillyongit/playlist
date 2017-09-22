@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 class LuckyController extends Controller
 {
 	/**
-	 * @Route("/lucky/number")
+	 * @Route("/lucky/number/{slug}")
 	 */
-	public function numberAction()
+	public function numberAction($slug = '')
 	{
 		$number = mt_rand(0, 100);
 		
