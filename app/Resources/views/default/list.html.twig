@@ -3,3 +3,10 @@
 {% block body %}
 Lista
 {% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		console.log('test');
+	</script>
+{% endblock %}

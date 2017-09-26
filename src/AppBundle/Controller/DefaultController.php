@@ -5,9 +5,15 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Psr\Log\LoggerInterface;
 
 class DefaultController extends Controller
 {
+	private $logger;
+	
+	public function __construct(LoggerInterface $logger) {
+		$this->logger = $logger;
+	}
     /**
      * @Route("/", name="homepage")
      */
@@ -20,12 +26,14 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/list/{what}", name="lista")
+     * @Route("/list/{what}/{howMany}", name="lista")
      */
-    public function listAction($what = 'artists')
+    public function listAction(Request $request, 
+    		$what = 'artists', 
+    		$howMany = 100, 
+    		LoggerInterface $logger)
     {
-    	$logger = $this->container->get('logger');
-    	$logger->info('listAction -> ' . $what);
+    	$this->logger->info('listAction -> ' . $what . ' ' . $howMany);
     	
     	// replace this example code with whatever you need
     	return $this->render('default/list.html.twig', [
