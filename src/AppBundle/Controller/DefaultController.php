@@ -26,7 +26,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/list/{what}/{howMany}", name="lista")
+     * @Route("/list/{what}/{howMany}", name="list")
      */
     public function listAction(Request $request, 
     		$what = 'artists', 
