@@ -69,7 +69,13 @@ swiftmailer:
     spool: { type: memory }
     
 assetic:
-    debug:          '%kernel.debug%'
+    debug:          false
     use_controller: '%kernel.debug%'
+    assets:
+      jquery_and_ui:
+        inputs:
+          - 'bundles/app/jquery/js/jquery-3.2.1.min.js'
+          - 'bundles/app/js/popper.js'
+          - 'bundles/app/bootstrap/js/bootstrap.min.js'
     filters:
-        cssrewrite: ~
+       cssrewrite: ~        
