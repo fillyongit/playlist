@@ -23,6 +23,13 @@
 		    <a class="nav-link active" href="{{ path('list') }}">Lista</a>
 		  </li>
 		</ul>
+		
+		<ul>
+		{% for entry in entries %}
+			<li>{{ entry.key }}: {{ entry.value }}</li>
+		{% endfor %}
+		</ul>
+		
         {% block body %}{% endblock %}
         {% block javascripts %}
 	        {% javascripts 
