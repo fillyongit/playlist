@@ -3,7 +3,8 @@ app:
     type: annotation
 
 list:
-    path:      /list/{what}/{howMany}
+    path:      /%app.route_prefix%/list/{what}/{howMany}
     defaults:  { _controller: AppBundle:Default:list, what: albums, howMany: 100 }
     requirements:
         howMany: '\d+'
+        _locale: '%app.locales%'
