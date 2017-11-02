@@ -20,14 +20,16 @@
 		    <a class="nav-link" href="{{ path('homepage') }}">Home</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link active" href="{{ path('list') }}">Lista</a>
+		    <a class="nav-link active" href="{{ path('list_locale', {'_locale': app.request.getLocale()}) }}">Lista</a>
 		  </li>
 		</ul>
 		
 		<ul>
-		{% for entry in entries %}
-			<li>{{ entry.key }}: {{ entry.value }}</li>
-		{% endfor %}
+		{% if entries is defined %}
+			{% for entry in entries %}
+				<li>{{ entry.key }}: {{ entry.value }}</li>
+			{% endfor %}
+		{% endif %}
 		</ul>
 		
         {% block body %}{% endblock %}
