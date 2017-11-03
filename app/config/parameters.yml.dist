@@ -17,8 +17,3 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
-    
-    app.locales: en|fr|de|it
-    app.route_prefix: '{_locale}'
-    app.list_rows: 100
-    app.list_default: 'albums'

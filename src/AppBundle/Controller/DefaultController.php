@@ -25,6 +25,8 @@ class DefaultController extends Controller
 		$this->logger = $logger;
 		$this->translator = $translator;
 		$this->session = $session;
+		
+		//$this->get('twig')->addGlobal('is_test', $isTest);
 	}
 	
     public function indexAction(Request $request)
