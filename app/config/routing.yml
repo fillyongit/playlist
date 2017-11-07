@@ -12,13 +12,13 @@ homepage_locale:
         
 list:
     path:      /list/{what}/{howMany}
-    defaults:  { _controller: AppBundle:Default:list, what: %app.list_default%, howMany: %app.list_rows% }
+    defaults:  { _controller: AppBundle:Default:list, what: '%app.list_default%', howMany: '%app.list_rows%' }
     requirements:
         howMany: '\d+'
         
 list_locale:
     path:      /%app.route_prefix%/list/{what}/{howMany}
-    defaults:  { _controller: AppBundle:Default:list, what: %app.list_default%, howMany: %app.list_rows% }
+    defaults:  { _controller: AppBundle:Default:list, what: '%app.list_default%', howMany: '%app.list_rows%' }
     requirements:
        howMany: '\d+'
        _locale: '%app.locales%'

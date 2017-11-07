@@ -38,7 +38,7 @@ class DefaultController extends Controller
     }
     
     public function listAction(Request $request, 
-    		$what = 'artists', 
+    		$what = 'albums', 
     		$howMany = 100)
     {
     	$this->logger->info('listAction -> ' . $what . ' ' . $howMany);
