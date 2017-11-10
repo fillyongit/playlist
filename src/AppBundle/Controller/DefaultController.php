@@ -38,7 +38,7 @@ class DefaultController extends Controller
     }
     
     public function listAction(Request $request, 
-    		$what = 'albums', 
+    		$what = 'songs', 
     		$howMany = 100)
     {
     	$this->logger->info('listAction -> ' . $what . ' ' . $howMany);
@@ -48,10 +48,11 @@ class DefaultController extends Controller
     	// replace this example code with whatever you need
     	return $this->render('default/list.html.twig', [
     		'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-    		'entries' => array(
-    				array('key' => 'locale', 'value' => $request->getLocale()),
-    				array('key' => 'title.albums_list', 'value' => $this->translator->trans('title.albums_list'))
-    		)
+    		'title' => $this->translator->trans('title.'.$what)
+//     		, 'entries' => array(
+//     				array('key' => 'locale', 'value' => $request->getLocale()),
+//     				array('key' => 'title.albums_list', 'value' => $this->translator->trans('title.albums_list'))
+//     		)
     	]);
     }
 }
