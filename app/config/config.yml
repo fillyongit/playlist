@@ -78,8 +78,9 @@ assetic:
     assets:
       jquery_and_ui:
         inputs:
-          - 'bundles/app/jquery/js/jquery-3.2.1.min.js'
-          - 'bundles/app/js/popper.js'
-          - 'bundles/app/bootstrap/js/bootstrap.min.js'
+          - 'assets/js/jquery-3.2.1.min.js'
+          - 'assets/js/popper.js'
+          - 'assets/bootstrap-4.0.0-beta.3/js/bootstrap.min.js'
     filters:
-       cssrewrite: ~        
+       cssrewrite: ~
+       scss: ~

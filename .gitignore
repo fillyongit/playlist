@@ -16,3 +16,4 @@
 /vendor/
 /web/bundles/
 /.settings/
+.DS_Store

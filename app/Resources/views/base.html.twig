@@ -6,9 +6,10 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
 	        {% stylesheets 
-	        	'bundles/app/bootstrap/css/bootstrap.min.css' 
-	        	'bundles/app/css/*' 
-	        	filter='cssrewrite' %}
+	        	'assets/bootstrap-4.0.0-beta.3/css/bootstrap.min.css' 
+	        	'assets/css/*' 
+	        	output='bundles/build/css/app.css' 
+	        	filter='cssrewrite,scss' %}
 	    		<link rel="stylesheet" href="{{ asset_url }}" />
 			{% endstylesheets %}
         {% endblock %}
@@ -61,7 +62,7 @@
         {% block javascripts %}
 	        {% javascripts 
 	        	'@jquery_and_ui' 
-	        	'bundles/app/js/*' 
+	        	'assets/js/*' 
 	        	output='bundles/build/js/app.js' %}
 	  			<script src="{{ asset_url }}"></script>
 			{% endjavascripts %}
