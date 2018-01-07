@@ -73,7 +73,7 @@ swiftmailer:
     spool: { type: memory }
     
 assetic:
-    debug:          false
+    debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
     assets:
       jquery_and_ui:
