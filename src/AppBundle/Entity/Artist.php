@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="artist")
  */
-class Artist
+class Artist implements PlEntityInterface
 {
 	/**
 	 * @ORM\Column(type="integer")
@@ -22,17 +22,19 @@ class Artist
 	private $name;
 	
 	/**
-	 * @ORM\Column(type="string", name="surname", length=100)
+	 * @ORM\Column(type="string", name="surname", length=100, nullable=TRUE)
 	 */
 	private $surName;
 	
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(type="text", nullable=TRUE)
 	 */
 	private $notes;
 	
 	/**
-	 * @ORM\Column(type="datetime", name="birthdate", length=100)
+	 * @ORM\Column(type="datetime", name="birthdate", length=100, nullable=TRUE)
 	 */
 	private $birthDate;
+
+	
 }

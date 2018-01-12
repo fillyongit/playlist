@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Artist;
+use AppBundle\Service\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,12 +41,13 @@ class DefaultController extends Controller
     
     public function listAction(Request $request, 
     		$what = 'songs', 
-    		$howMany = 100)
+    		$howMany = 100,
+    		Model $model)
     {
     	$this->logger->info('listAction -> ' . $what . ' ' . $howMany);
 
     	// print $this->getParameter('database_name');
-    	
+    	// $repository = $model->getDoctrineRepository(Artist::class);
     	$repository = $this->getDoctrine()->getRepository(Artist::class);
     	$artists = $repository->findAll();
 
