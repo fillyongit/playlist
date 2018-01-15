@@ -47,9 +47,8 @@ class DefaultController extends Controller
     	$this->logger->info('listAction -> ' . $what . ' ' . $howMany);
 
     	// print $this->getParameter('database_name');
-    	// $repository = $model->getDoctrineRepository(Artist::class);
-    	$repository = $this->getDoctrine()->getRepository(Artist::class);
-    	$artists = $repository->findAll();
+    	
+    	$artists = $model->getCollection(Artist::class);
 
     	// replace this example code with whatever you need
     	return $this->render('default/'.$what.'.html.twig', [
