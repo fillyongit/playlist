@@ -1,14 +1,16 @@
 var webpack = require('webpack');
+var path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const extractSass = new ExtractTextPlugin({
-	  filename: "main.css",
+	  filename: "../../../web/bundles/build/bundle.css"
 });
 
 module.exports = {
 		entry: './main.js',
 		output: {
-			filename: 'bundle.js'
+			filename: 'bundle.js',
+			path: path.resolve(__dirname, '../../../../web/bundles/build'),
 		},
 		module: {
 			rules: [
@@ -46,8 +48,8 @@ module.exports = {
 			        use: ['style-loader', 'css-loader']
 			    },
 				{ 
-					test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
-					loader: 'url-loader?limit=100000'
+					test: /\.(png|woff|woff2|eot|ttf|svg|jpg)$/, 
+					loader: 'url-loader?name=[name].[ext]&limit=100000'
 				}
 			]
 		},

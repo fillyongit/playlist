@@ -5,12 +5,7 @@
    		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-	        {% stylesheets 
-	        	'@AppBundle/Resources/assets/main.css'
-	        	output='bundles/build/css/app.css' 
-	        	filter='cssrewrite' %}
-	    		<link rel="stylesheet" href="{{ asset_url }}" />
-			{% endstylesheets %}
+			<link rel="stylesheet" href="{{ asset('bundles/build/bundle.css') }}" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -59,11 +54,7 @@
         </div>
         
         {% block javascripts %}
-	        {% javascripts 
-	        	'@AppBundle/Resources/assets/bundle.js'  
-	        	output='bundles/build/js/app.js' %}
-	  			<script src="{{ asset_url }}"></script>
-			{% endjavascripts %}
+			<script src="{{ asset('bundles/build/bundle.js') }}"></script>
         {% endblock %}
     </body>
 </html>
