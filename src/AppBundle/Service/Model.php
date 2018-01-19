@@ -1,7 +1,6 @@
 <?php 
 namespace AppBundle\Service;
 
-use Doctrine\Bundle\DoctrineBundle\Registry as DoctrineBundle;
 use AppBundle\Entity;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;

@@ -36,5 +36,11 @@ class Artist implements PlEntityInterface
 	 */
 	private $birthDate;
 
-	
+	public function __get($name) {
+		if (property_exists(__CLASS__, $name)) {
+			return $this->$name;
+		} else {
+			throw new \Exception('Proprietà ' . $name . ' insesistente in ' . __CLASS__);
+		}
+	}
 }

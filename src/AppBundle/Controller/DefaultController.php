@@ -49,7 +49,7 @@ class DefaultController extends Controller
     	// print $this->getParameter('database_name');
     	
     	$artists = $model->getCollection(Artist::class);
-
+    	var_dump($artists);
     	// replace this example code with whatever you need
     	return $this->render('default/'.$what.'.html.twig', [
     		'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,

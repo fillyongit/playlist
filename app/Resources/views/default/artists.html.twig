@@ -2,17 +2,19 @@
 
 {% block grid %}
 <div class="container">
+  {% for row in data %}
   <div class="row">
     <div class="col-sm">
-      One of three columns
+      {{ row.id }}
     </div>
     <div class="col-sm">
-      One of three columns
+      {{ row.name }}
     </div>
     <div class="col-sm">
-      One of three columns
+      {{ row.birthDate }}
     </div>
   </div>
+  {% endfor  %}
 </div>
 
 <div id="test-react"></div>
