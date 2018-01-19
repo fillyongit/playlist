@@ -3,6 +3,8 @@ import 'bootstrap';
 // si potrebbero anche importare in plugin indivuidualmente come:
 // import 'bootstrap/js/dist/util';
 
+import Test from './test.jsx';
+
 import moment from 'moment';
 
 import './index.scss'; // Entry point css. Dentro importa gli stili di boostrap.
