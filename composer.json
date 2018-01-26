@@ -47,7 +47,10 @@
 			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
 			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
 		],
-		"pre-install-cmd" : "@symfony-scripts",
+		"pre-install-cmd" : [
+			"@symfony-scripts",
+			"AppBundle\\Composer\\ScriptHandler::appAssetsInstall"
+		],
 		"post-install-cmd" : "@symfony-scripts",
 		"post-update-cmd" : "@symfony-scripts"
 	},
@@ -64,5 +67,6 @@
 		"incenteev-parameters" : {
 			"file" : "app/config/parameters.yml"
 		}
-	}
+	},
+	"minimum-stability" : "RC"
 }
