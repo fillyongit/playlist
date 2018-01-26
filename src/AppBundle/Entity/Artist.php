@@ -49,6 +49,6 @@ class Artist implements PlEntityInterface
 	}
 	
 	public function getBirthDate() {
-		return $this->birthDate;
+		return $this->birthDate->format('d-m-Y');
 	}
 }

@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Artist;
 use AppBundle\Service\Model;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Psr\Log\LoggerInterface;
@@ -49,7 +48,7 @@ class DefaultController extends Controller
     	// print $this->getParameter('database_name');
     	
     	$data = $model->getCollection(Artist::class);
-var_dump($data);
+
     	// replace this example code with whatever you need
     	return $this->render('default/'.$what.'.html.twig', [
     		'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
