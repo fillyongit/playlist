@@ -47,11 +47,11 @@
 			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
 			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
 		],
-		"pre-install-cmd" : [
+		"pre-install-cmd" : "@symfony-scripts",
+		"post-install-cmd" : [
 			"@symfony-scripts",
 			"AppBundle\\Composer\\ScriptHandler::appAssetsInstall"
 		],
-		"post-install-cmd" : "@symfony-scripts",
 		"post-update-cmd" : "@symfony-scripts"
 	},
 	"config" : {

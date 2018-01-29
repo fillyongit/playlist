@@ -9,13 +9,9 @@ class ScriptHandler
 {
 	public static function appAssetsInstall(Event $event)
 	{
-		$appAssetsDir = './src/AppBundle/Resources/assets';
-		
-		if (null === $appAssetsDir) {
-			return;
-		}
-		
-		$cmd = escapeshellarg('npm --prefix ' . $appAssetsDir . ' install ' . $appAssetsDir);
+		$event->getIO()->write('Installa i package nodejs.');
+				
+		$cmd = 'cd "' . escapeshellarg(__DIR__ . '/../Resources/assets'). '" && npm install';
 		$process = new Process($cmd, null, null, null, 300);
 		$process->run(function ($type, $buffer) use ($event) { $event->getIO()->write($buffer, false); });
 		if (!$process->isSuccessful()) {

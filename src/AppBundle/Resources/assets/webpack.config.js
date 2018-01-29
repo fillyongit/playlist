@@ -3,14 +3,14 @@ var path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const extractSass = new ExtractTextPlugin({
-	  filename: "../../../web/bundles/build/bundle.css"
+	  filename: "bundle.css"
 });
 
 module.exports = {
 		entry: './main.js',
 		output: {
 			filename: 'bundle.js',
-			path: path.resolve(__dirname, '../../../../web/bundles/build'),
+			path: path.resolve(__dirname, '../../../../web/assets'),
 		},
 		module: {
 			rules: [
@@ -49,7 +49,7 @@ module.exports = {
 			    },
 				{ 
 					test: /\.(png|woff|woff2|eot|ttf|svg|jpg)$/, 
-					loader: 'url-loader?name=[name].[ext]&limit=100000'
+					loader: 'url-loader?name=images/[name].[ext]&limit=100000'
 				}
 			]
 		},
