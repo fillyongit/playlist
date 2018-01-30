@@ -2,16 +2,24 @@
 
 {% block grid %}
 <div class="container">
-  {% for row in data %}
-  <div class="row">
-    <div class="col-sm">
-      {{ row.id }}
+  <div class="row grid header">
+    <div class="col-8">
+      Nome
     </div>
-    <div class="col-sm">
+    <div class="col-4">
+      Data nascita/formazione
+    </div>  	
+  </div>
+  {% for row in data %}
+  <div class="row grid">
+    <div class="col-8">
       {{ row.name }}
     </div>
-    <div class="col-sm">
+    <div class="col-4">
       {{ row.birthDate }}
+    </div>
+    <div id="grid-row-buttons">
+    	
     </div>
   </div>
   {% endfor  %}

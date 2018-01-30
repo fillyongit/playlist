@@ -8,3 +8,17 @@ body {
 	/* background-color: $backgroundColor; */
 	background: url('images/bird-trap.jpg');
 }
+
+.grid {
+	border: 1px solid #ccc;
+}
+
+.grid.header {
+	background-color: #ccc;
+}
+
+.grid {
+	div:not(:last-child) {
+		border-right: 1px solid #ccc;
+	}
+}
