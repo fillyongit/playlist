@@ -60,6 +60,10 @@ EOF
 	
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-    	return parent::execute($input, $output);
+    	$exitCode = parent::execute($input, $output);
+    	
+    	// Eseguire "npm run watch".
+    	
+    	return $exitCode;
     }
 }
