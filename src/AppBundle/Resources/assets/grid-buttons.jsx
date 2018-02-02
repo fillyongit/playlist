@@ -5,7 +5,11 @@ class GridButtons extends React.Component {
  
   constructor(props) {
     super(props);
-    // this.state = {date: new Date()};
+    this.state = {isPlayButtonToggleOn: false};
+
+    // Necessario fare il bind del metodo per poter usare 
+    // this all'interno del metodo stesso, altrimenti this è undefined.
+    this.playArtistList = this.playArtistList.bind(this);
   }
 
   componentDidMount() {
@@ -16,11 +20,29 @@ class GridButtons extends React.Component {
 
   }
 
+  componentWillUpdate() {
+
+  }
+
+  componentDidUpdate() {
+    
+  }
+
+  playArtistList() {
+    this.setState((prevState, props) => ({
+        isPlayButtonToggleOn: !prevState.isPlayButtonToggleOn
+      })
+    );
+  }
+
 	render() {
 		return (
       <div style={{display:'flex'}}>
-        <div>M</div>
-        <div>E</div>
+        <button id="add-button">M</button>
+        <button id="edit-button">E</button>
+        <button id="play-button" onClick={this.playArtistList} style={{color:this.state.isPlayButtonToggleOn?'green':'#000'}}>
+          {this.state.isPlayButtonToggleOn ? 'Now playing' : 'P'}
+        </button>
       </div>
     );
 	}

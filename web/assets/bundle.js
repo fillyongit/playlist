@@ -51443,8 +51443,14 @@ var GridButtons = function (_React$Component) {
   function GridButtons(props) {
     _classCallCheck(this, GridButtons);
 
-    return _possibleConstructorReturn(this, (GridButtons.__proto__ || Object.getPrototypeOf(GridButtons)).call(this, props));
-    // this.state = {date: new Date()};
+    var _this = _possibleConstructorReturn(this, (GridButtons.__proto__ || Object.getPrototypeOf(GridButtons)).call(this, props));
+
+    _this.state = { isPlayButtonToggleOn: false };
+
+    // Necessario fare il bind del metodo per poter usare 
+    // this all'interno del metodo stesso, altrimenti this è undefined.
+    _this.playArtistList = _this.playArtistList.bind(_this);
+    return _this;
   }
 
   _createClass(GridButtons, [{
@@ -51454,20 +51460,40 @@ var GridButtons = function (_React$Component) {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {}
   }, {
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate() {}
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {}
+  }, {
+    key: 'playArtistList',
+    value: function playArtistList() {
+      this.setState(function (prevState, props) {
+        return {
+          isPlayButtonToggleOn: !prevState.isPlayButtonToggleOn
+        };
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         { style: { display: 'flex' } },
         _react2.default.createElement(
-          'div',
-          null,
+          'button',
+          { id: 'add-button' },
           'M'
         ),
         _react2.default.createElement(
-          'div',
-          null,
+          'button',
+          { id: 'edit-button' },
           'E'
+        ),
+        _react2.default.createElement(
+          'button',
+          { id: 'play-button', onClick: this.playArtistList, style: { color: this.state.isPlayButtonToggleOn ? 'green' : '#000' } },
+          this.state.isPlayButtonToggleOn ? 'Now playing' : 'P'
         )
       );
     }
