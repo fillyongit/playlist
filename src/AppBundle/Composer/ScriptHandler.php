@@ -3,7 +3,6 @@ namespace AppBundle\Composer;
 
 use Symfony\Component\Process\Process;
 use Composer\Script\Event;
-use Composer\IO\IOInterface;
 
 class ScriptHandler
 {

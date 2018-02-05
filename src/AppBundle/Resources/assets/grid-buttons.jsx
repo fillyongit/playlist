@@ -38,9 +38,9 @@ class GridButtons extends React.Component {
 	render() {
 		return (
       <div style={{display:'flex'}}>
-        <button id="add-button">M</button>
-        <button id="edit-button">E</button>
-        <button id="play-button" onClick={this.playArtistList} style={{color:this.state.isPlayButtonToggleOn?'green':'#000'}}>
+        <button>M</button>
+        <button>E</button>
+        <button onClick={this.playArtistList} style={{color:this.state.isPlayButtonToggleOn?'green':'#000'}}>
           {this.state.isPlayButtonToggleOn ? 'Now playing' : 'P'}
         </button>
       </div>

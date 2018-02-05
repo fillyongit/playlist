@@ -7,7 +7,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Bundle\WebServerBundle\Command\ServerRunCommand;
+use Symfony\Component\Process\Process;
+use Composer\Script\Event;
 
 class ServerRunExtCommand extends ServerRunCommand
 {
@@ -60,9 +64,23 @@ EOF
 	
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-    	$exitCode = parent::execute($input, $output);
+//     	$io = new SymfonyStyle($input, $output instanceof ConsoleOutputInterface ? $output->getErrorOutput() : $output);
     	
-    	// Eseguire "npm run watch".
+//     	// Esegue "npm run watch".
+//     	$cmd = 'cd "' . escapeshellarg(__DIR__ . '/../Resources/assets'). '" && npm run watch';
+//     	$process = new Process($cmd, null, null, null, 300);
+//     	$process->run(function ($type, $buffer) use ($output) {
+//     		// $event->getIO()->write($buffer, false);
+//     		$output->write($buffer, false, OutputInterface::OUTPUT_RAW);
+//     	});
+    	
+//     	if (!$process->isSuccessful()) {
+//     		$io->error(sprintf("An error occurred when executing the \"%s\" command:\n\n%s\n\n%s", escapeshellarg($cmd), self::removeDecoration($process->getOutput()), self::removeDecoration($process->getErrorOutput())));    	
+//     	}
+ 
+    	//$io->success(sprintf('Server listening on http://%s', $config->getAddress()));
+    			
+    	$exitCode = parent::execute($input, $output);
     	
     	return $exitCode;
     }

@@ -32,6 +32,12 @@ class Artist implements PlEntityInterface
 	private $notes;
 	
 	/**
+	 * @ORM\ManyToMany(targetEntity="Record", inversedBy="artists")
+	 * @ORM\JoinTable(name="artist_records")
+	 */
+	private $records;
+	
+	/**
 	 * @ORM\Column(type="datetime", name="birthdate", length=100, nullable=TRUE)
 	 */
 	private $birthDate;
