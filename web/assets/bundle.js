@@ -27405,9 +27405,21 @@ return zhTw;
 
 __webpack_require__(136);
 
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(143);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _gridButtons = __webpack_require__(139);
 
 var _gridButtons2 = _interopRequireDefault(_gridButtons);
+
+var _artistForm = __webpack_require__(161);
+
+var _artistForm2 = _interopRequireDefault(_artistForm);
 
 var _moment = __webpack_require__(0);
 
@@ -27419,15 +27431,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // Entry point css. Dentro importa gli stili di boostrap.
 
-// var moment = require('moment');
-$(document).ready(function () {
-  console.log('jQuery works!');
-});
 // si potrebbero anche importare in plugin indivuidualmente come:
 // import 'bootstrap/js/dist/util';
 
+$(document).ready(function () {
+	console.log('jQuery works!');
+}); // var moment = require('moment');
+
 
 console.log((0, _moment2.default)().startOf('day').fromNow());
+
+$('[data-react-id="grid-row-buttons"]').each(function (i, el) {
+	_reactDom2.default.render(_react2.default.createElement(_gridButtons2.default, null), el);
+});
+
+$('[data-react-id="form"]').each(function (i, el) {
+	_reactDom2.default.render(_react2.default.createElement(_artistForm2.default, null), el);
+});
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
@@ -33810,6 +33830,10 @@ module.exports = g;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(5);
@@ -33893,7 +33917,7 @@ var GridButtons = function (_React$Component) {
   return GridButtons;
 }(_react2.default.Component);
 
-_reactDom2.default.render(_react2.default.createElement(GridButtons, null), document.getElementById('react-grid-row-buttons'));
+exports.default = GridButtons;
 
 /***/ }),
 /* 140 */
@@ -51496,6 +51520,109 @@ webpackContext.id = 153;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 155 */,
+/* 156 */,
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */,
+/* 161 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(143);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ArtistForm = function (_React$Component) {
+	_inherits(ArtistForm, _React$Component);
+
+	function ArtistForm(props) {
+		_classCallCheck(this, ArtistForm);
+
+		var _this = _possibleConstructorReturn(this, (ArtistForm.__proto__ || Object.getPrototypeOf(ArtistForm)).call(this, props));
+
+		_this.state = {
+			formIsVisible: false,
+			name: 'Nuovo artista'
+		};
+
+		_this.handleNameChange = _this.handleNameChange.bind(_this);
+		_this.handleSubmit = _this.handleSubmit.bind(_this);
+		return _this;
+	}
+
+	_createClass(ArtistForm, [{
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			this.initialState = this.state;
+		}
+	}, {
+		key: 'handleNameChange',
+		value: function handleNameChange(event) {
+			this.setState({ name: event.target.value });
+		}
+	}, {
+		key: 'handleSubmit',
+		value: function handleSubmit(event) {
+			alert('An essay was submitted: ' + this.state.value);
+
+			event.preventDefault();
+		}
+	}, {
+		key: 'reste',
+		value: function reste() {
+			this.setState(this.initialState);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'form',
+				{ onSubmit: this.handleSubmit, style: { display: this.state.formIsVisible ? 'block' : 'hide' } },
+				_react2.default.createElement(
+					'label',
+					null,
+					'Nome *:'
+				),
+				_react2.default.createElement('input', { type: 'text', value: this.state.name, onChange: this.handleNameChange }),
+				_react2.default.createElement(
+					'label',
+					null,
+					'Note:'
+				),
+				_react2.default.createElement('textarea', null),
+				_react2.default.createElement('input', { id: '', type: 'submit', value: 'Salva' })
+			);
+		}
+	}]);
+
+	return ArtistForm;
+}(_react2.default.Component);
+
+exports.default = ArtistForm;
 
 /***/ })
 /******/ ]);

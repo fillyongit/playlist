@@ -1,7 +1,6 @@
-{% extends 'default/list.html.twig' %}
+{% extends 'default/catalog.html.twig' %}
 
 {% block grid %}
-<div class="container">
   <div class="row grid header">
     <div class="col-6">
       Nome
@@ -19,8 +18,11 @@
     <div class="col-4">
       {{ row.birthDate }}
     </div>
-    <div class="col-2" id="react-grid-row-buttons"></div>
+    <div class="col-2" data-react-id="grid-row-buttons"></div>
   </div>
   {% endfor  %}
-</div>
+{% endblock %}
+
+{% block form %}
+	<div class="form" data-react-id="form"></div>
 {% endblock %}

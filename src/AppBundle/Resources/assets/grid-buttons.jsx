@@ -48,4 +48,4 @@ class GridButtons extends React.Component {
 	}
 }
 
-ReactDOM.render(<GridButtons/>, document.getElementById('react-grid-row-buttons'));
+export default GridButtons;
