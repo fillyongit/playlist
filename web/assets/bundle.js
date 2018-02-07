@@ -27417,10 +27417,6 @@ var _gridButtons = __webpack_require__(139);
 
 var _gridButtons2 = _interopRequireDefault(_gridButtons);
 
-var _artistForm = __webpack_require__(161);
-
-var _artistForm2 = _interopRequireDefault(_artistForm);
-
 var _moment = __webpack_require__(0);
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -27431,22 +27427,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // Entry point css. Dentro importa gli stili di boostrap.
 
-// si potrebbero anche importare in plugin indivuidualmente come:
-// import 'bootstrap/js/dist/util';
-
+// var moment = require('moment');
 $(document).ready(function () {
 	console.log('jQuery works!');
-}); // var moment = require('moment');
-
+});
+// si potrebbero anche importare in plugin indivuidualmente come:
+// import 'bootstrap/js/dist/util';
 
 console.log((0, _moment2.default)().startOf('day').fromNow());
 
 $('[data-react-id="grid-row-buttons"]').each(function (i, el) {
-	_reactDom2.default.render(_react2.default.createElement(_gridButtons2.default, null), el);
-});
-
-$('[data-react-id="form"]').each(function (i, el) {
-	_reactDom2.default.render(_react2.default.createElement(_artistForm2.default, null), el);
+	var rowId = $(el).attr('data-sql-id');
+	_reactDom2.default.render(_react2.default.createElement(_gridButtons2.default, { id: rowId }), el);
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
@@ -33844,6 +33836,10 @@ var _reactDom = __webpack_require__(143);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _artistForm = __webpack_require__(161);
+
+var _artistForm2 = _interopRequireDefault(_artistForm);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33858,13 +33854,19 @@ var GridButtons = function (_React$Component) {
   function GridButtons(props) {
     _classCallCheck(this, GridButtons);
 
+    //console.log(this.props.id);
     var _this = _possibleConstructorReturn(this, (GridButtons.__proto__ || Object.getPrototypeOf(GridButtons)).call(this, props));
 
-    _this.state = { isPlayButtonToggleOn: false };
+    _this.state = {
+      isPlayButtonToggleOn: false,
+      isEditing: false
+    };
 
     // Necessario fare il bind del metodo per poter usare 
     // this all'interno del metodo stesso, altrimenti this è undefined.
     _this.playArtistList = _this.playArtistList.bind(_this);
+    _this.editArtist = _this.editArtist.bind(_this);
+    _this.handleFormClose = _this.handleFormClose.bind(_this);
     return _this;
   }
 
@@ -33881,8 +33883,15 @@ var GridButtons = function (_React$Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {}
   }, {
+    key: 'editArtist',
+    value: function editArtist(e) {
+      this.setState({
+        isEditing: true
+      });
+    }
+  }, {
     key: 'playArtistList',
-    value: function playArtistList() {
+    value: function playArtistList(e) {
       this.setState(function (prevState, props) {
         return {
           isPlayButtonToggleOn: !prevState.isPlayButtonToggleOn
@@ -33890,14 +33899,29 @@ var GridButtons = function (_React$Component) {
       });
     }
   }, {
+    key: 'handleFormClose',
+    value: function handleFormClose() {
+      this.setState({
+        isEditing: false
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
+
+      var form = null;
+      if (this.state.isEditing) {
+        form = _react2.default.createElement(_artistForm2.default, { id: this.props.id, onFormClose: this.handleFormClose });
+      } else {
+        form = null;
+      }
+
       return _react2.default.createElement(
         'div',
         { style: { display: 'flex' } },
         _react2.default.createElement(
           'button',
-          null,
+          { onClick: this.editArtist },
           'M'
         ),
         _react2.default.createElement(
@@ -33909,7 +33933,8 @@ var GridButtons = function (_React$Component) {
           'button',
           { onClick: this.playArtistList, style: { color: this.state.isPlayButtonToggleOn ? 'green' : '#000' } },
           this.state.isPlayButtonToggleOn ? 'Now playing' : 'P'
-        )
+        ),
+        form
       );
     }
   }]);
@@ -51562,59 +51587,84 @@ var ArtistForm = function (_React$Component) {
 	function ArtistForm(props) {
 		_classCallCheck(this, ArtistForm);
 
+		// Chiama php service per prendere i dati.
 		var _this = _possibleConstructorReturn(this, (ArtistForm.__proto__ || Object.getPrototypeOf(ArtistForm)).call(this, props));
 
-		_this.state = {
-			formIsVisible: false,
-			name: 'Nuovo artista'
-		};
+		var stateObj = {};
+		stateObj['formIsVisible'] = true;
+		stateObj['id'] = _this.props.id;
+		stateObj['name'] = 'Pearl Jam';
 
-		_this.handleNameChange = _this.handleNameChange.bind(_this);
+		_this.state = stateObj;
+
+		_this.handleChange = _this.handleChange.bind(_this);
 		_this.handleSubmit = _this.handleSubmit.bind(_this);
+		_this.handleClose = _this.handleClose.bind(_this);
+
 		return _this;
 	}
 
 	_createClass(ArtistForm, [{
 		key: 'componentWillMount',
-		value: function componentWillMount() {
-			this.initialState = this.state;
-		}
+		value: function componentWillMount() {}
 	}, {
-		key: 'handleNameChange',
-		value: function handleNameChange(event) {
-			this.setState({ name: event.target.value });
+		key: 'handleChange',
+		value: function handleChange(e) {
+			var obj = {};
+			obj[e.target.name] = e.target.value;
+			this.setState(obj);
 		}
 	}, {
 		key: 'handleSubmit',
-		value: function handleSubmit(event) {
-			alert('An essay was submitted: ' + this.state.value);
-
-			event.preventDefault();
+		value: function handleSubmit(e) {
+			e.preventDefault();
 		}
 	}, {
-		key: 'reste',
-		value: function reste() {
-			this.setState(this.initialState);
+		key: 'handleClose',
+		value: function handleClose(e) {
+			// Chiamo un metodo del componente padre.
+			console.log(this.state);
+
+			// Chiama php service per salvataggio dati.
+
+			this.props.onFormClose();
+		}
+	}, {
+		key: 'getValue',
+		value: function getValue(fieldName) {
+			var defaultVal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+			return this.state[fieldName] || defaultVal;
 		}
 	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
-				'form',
-				{ onSubmit: this.handleSubmit, style: { display: this.state.formIsVisible ? 'block' : 'hide' } },
+				'div',
+				null,
 				_react2.default.createElement(
-					'label',
-					null,
-					'Nome *:'
-				),
-				_react2.default.createElement('input', { type: 'text', value: this.state.name, onChange: this.handleNameChange }),
-				_react2.default.createElement(
-					'label',
-					null,
-					'Note:'
-				),
-				_react2.default.createElement('textarea', null),
-				_react2.default.createElement('input', { id: '', type: 'submit', value: 'Salva' })
+					'form',
+					{ onSubmit: this.handleSubmit },
+					_react2.default.createElement('input', { type: 'hidden', name: 'id', value: this.getValue('id', 0) }),
+					_react2.default.createElement(
+						'label',
+						null,
+						'Nome *:'
+					),
+					_react2.default.createElement('input', { type: 'text', name: 'name', value: this.getValue('name'), onChange: this.handleChange }),
+					_react2.default.createElement(
+						'label',
+						null,
+						'Note:'
+					),
+					_react2.default.createElement('textarea', { name: 'notes' }),
+					_react2.default.createElement('input', { type: 'submit', value: 'Salva' }),
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.handleClose },
+						'chiudi'
+					)
+				)
 			);
 		}
 	}]);

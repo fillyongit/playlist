@@ -5610,10 +5610,13 @@ a.text-dark:hover, a.text-dark:focus {
     border: 1px solid #ddd !important; } }
 body {
   /* background-color: $backgroundColor; */
-  background: url(images/bird-trap.jpg); }
-.grid {
-  border: 1px solid #ccc; }
+  background: url(images/bck.jpg); }
+.container {
+  padding: 40px;
+  background-color: #fff;
+  margin-top: 0px; }
 .grid.header {
-  background-color: #ccc; }
-.grid div:not(:last-child) {
-  border-right: 1px solid #ccc; }
+  border-bottom: 2px solid #000;
+  font-size: .7em; }
+.row:not(:last-child) {
+  border-bottom: 1px solid #000; }

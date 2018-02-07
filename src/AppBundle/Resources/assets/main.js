@@ -6,7 +6,6 @@ import 'bootstrap';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import GridButtons from './grid-buttons.jsx';
-import ArtistForm from './artist-form.jsx';
 
 import moment from 'moment';
 
@@ -17,9 +16,6 @@ $(document).ready(function() { console.log('jQuery works!'); } );
 console.log(moment().startOf('day').fromNow());
 
 $('[data-react-id="grid-row-buttons"]').each(function(i, el){
-	ReactDOM.render(<GridButtons/>, el);
-});
-
-$('[data-react-id="form"]').each(function(i, el){
-	ReactDOM.render(<ArtistForm/>, el);
+	let rowId = $(el).attr('data-sql-id');
+	ReactDOM.render(<GridButtons id={rowId} />, el);
 });

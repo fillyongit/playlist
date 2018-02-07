@@ -6,21 +6,22 @@ $backgroundColor: #ccc;
 
 body {
 	/* background-color: $backgroundColor; */
-	background: url('images/bird-trap.jpg');
+	background: url('images/bck.jpg');
 }
 
-.grid {
-	border: 1px solid #ccc;
+.container {
+	padding: 40px;
+	background-color: #fff;
+	margin-top: 0px;
 }
 
 .grid.header {
-	background-color: #ccc;
+	border-bottom: 2px solid #000;
+	font-size: .7em;
 }
 
-.grid {
-	div:not(:last-child) {
-		border-right: 1px solid #ccc;
-	}
+.row:not(:last-child) {
+	border-bottom: 1px solid #000;
 }
 
 .form {

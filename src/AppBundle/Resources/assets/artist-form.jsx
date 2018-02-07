@@ -4,45 +4,65 @@ import ReactDOM from 'react-dom';
 class ArtistForm extends React.Component {
 	constructor(props) {
 	    super(props);
-	    this.state = {
-	    	formIsVisible: false,
-	    	name: 'Nuovo artista'
-	    };
 
-	    this.handleNameChange = this.handleNameChange.bind(this);
+	   	// Chiama php service per prendere i dati.
+	    let stateObj = {};
+	    stateObj['formIsVisible'] = true;
+	    stateObj['id'] = this.props.id;
+	    stateObj['name'] = 'Pearl Jam';
+
+	    this.state = stateObj;
+
+	    this.handleChange = this.handleChange.bind(this);
 	    this.handleSubmit = this.handleSubmit.bind(this);
+	    this.handleClose = this.handleClose.bind(this);
+
+
+
   	}
 
 	componentWillMount() {
-	    this.initialState = this.state
+	    
 	}
 
-  	handleNameChange(event) {
-    	this.setState({name: event.target.value});
-
+	 handleChange(e) {
+	 	let obj = {};
+	 	obj[e.target.name] = e.target.value;
+    	this.setState(obj);
   	}
 
-  	handleSubmit(event) {
-    	alert('An essay was submitted: ' + this.state.value);
-
-   	 	event.preventDefault();
+  	handleSubmit(e) {
+   	 	e.preventDefault();
   	}
 
-  	reste() {
-		this.setState(this.initialState)
-  	}
+	handleClose(e) {
+		// Chiamo un metodo del componente padre.
+		console.log(this.state);
+
+		// Chiama php service per salvataggio dati.
+
+		this.props.onFormClose();
+	}
+
+	getValue(fieldName, defaultVal = '') {
+		return (this.state[fieldName] || defaultVal);
+	}
 
   	render() {
 	    return (
-	      <form onSubmit={this.handleSubmit} style={{display: this.state.formIsVisible ? 'block' : 'hide' }}>
-		       <label>Nome *:</label>
-		       <input type="text" value={this.state.name} onChange={this.handleNameChange} />
-		       
-		       <label>Note:</label>
-		       <textarea />
-	        
-		       <input id="" type="submit" value="Salva" />
-	      </form>
+	      <div>
+		      <form onSubmit={this.handleSubmit}>
+		      		<input type="hidden" name="id" value={this.getValue('id', 0)} />
+			       <label>Nome *:</label>
+			       <input type="text" name="name" value={this.getValue('name')} onChange={this.handleChange}  />
+			       
+			       <label>Note:</label>
+			       <textarea name="notes" />
+		        
+			       <input type="submit" value="Salva" />
+			       <button onClick={this.handleClose}>chiudi</button>
+		      </form>
+	      </div>
 	    );
   	}	
 }
