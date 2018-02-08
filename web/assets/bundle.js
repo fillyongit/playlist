@@ -27438,7 +27438,8 @@ console.log((0, _moment2.default)().startOf('day').fromNow());
 
 $('[data-react-id="grid-row-buttons"]').each(function (i, el) {
 	var rowId = $(el).attr('data-sql-id');
-	_reactDom2.default.render(_react2.default.createElement(_gridButtons2.default, { id: rowId }), el);
+	var entityUrl = $(el).attr('data-entity-url');
+	_reactDom2.default.render(_react2.default.createElement(_gridButtons2.default, { id: rowId, entityUrl: entityUrl }), el);
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
@@ -33908,10 +33909,9 @@ var GridButtons = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-
       var form = null;
       if (this.state.isEditing) {
-        form = _react2.default.createElement(_artistForm2.default, { id: this.props.id, onFormClose: this.handleFormClose });
+        form = _react2.default.createElement(_artistForm2.default, { id: this.props.id, onFormClose: this.handleFormClose, url: this.props.entityUrl });
       } else {
         form = null;
       }
@@ -51587,32 +51587,56 @@ var ArtistForm = function (_React$Component) {
 	function ArtistForm(props) {
 		_classCallCheck(this, ArtistForm);
 
-		// Chiama php service per prendere i dati.
 		var _this = _possibleConstructorReturn(this, (ArtistForm.__proto__ || Object.getPrototypeOf(ArtistForm)).call(this, props));
 
-		var stateObj = {};
-		stateObj['formIsVisible'] = true;
-		stateObj['id'] = _this.props.id;
-		stateObj['name'] = 'Pearl Jam';
-
-		_this.state = stateObj;
+		_this.state = {
+			formIsVisible: true,
+			dataLoaded: false,
+			data: {},
+			error: null
+		};
 
 		_this.handleChange = _this.handleChange.bind(_this);
 		_this.handleSubmit = _this.handleSubmit.bind(_this);
 		_this.handleClose = _this.handleClose.bind(_this);
-
 		return _this;
 	}
 
 	_createClass(ArtistForm, [{
-		key: 'componentWillMount',
-		value: function componentWillMount() {}
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
+
+			// Chiama php service per prendere i dati.
+			// this.props.id
+			fetch(this.props.url, {
+				credentials: 'same-origin'
+			}).then(function (res) {
+				return res.json();
+			}).then(function (result) {
+				_this2.setState({
+					dataLoaded: true,
+					data: result
+				});
+			},
+			// Note: it's important to handle errors here
+			// instead of a catch() block so that we don't swallow
+			// exceptions from actual bugs in components.
+			function (error) {
+				_this2.setState({
+					dataLoaded: true,
+					error: error
+				});
+			});
+		}
 	}, {
 		key: 'handleChange',
 		value: function handleChange(e) {
-			var obj = {};
+			var obj = this.state.data;
 			obj[e.target.name] = e.target.value;
-			this.setState(obj);
+			this.setState({
+				data: obj
+			});
 		}
 	}, {
 		key: 'handleSubmit',
@@ -51634,38 +51658,52 @@ var ArtistForm = function (_React$Component) {
 		value: function getValue(fieldName) {
 			var defaultVal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-			return this.state[fieldName] || defaultVal;
+			return this.state.data.hasOwnProperty(fieldName) && this.state.data[fieldName] || defaultVal;
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'form',
-					{ onSubmit: this.handleSubmit },
-					_react2.default.createElement('input', { type: 'hidden', name: 'id', value: this.getValue('id', 0) }),
+			if (this.state.error) {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'alert alert-warning', role: 'alert' },
+					'Impossibile recuperare il dato!'
+				);
+			} else if (!this.state.dataLoaded) {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'alert alert-primary', role: 'alert' },
+					'Loading...'
+				);
+			} else {
+				return _react2.default.createElement(
+					'div',
+					null,
 					_react2.default.createElement(
-						'label',
-						null,
-						'Nome *:'
-					),
-					_react2.default.createElement('input', { type: 'text', name: 'name', value: this.getValue('name'), onChange: this.handleChange }),
-					_react2.default.createElement(
-						'label',
-						null,
-						'Note:'
-					),
-					_react2.default.createElement('textarea', { name: 'notes' }),
-					_react2.default.createElement('input', { type: 'submit', value: 'Salva' }),
-					_react2.default.createElement(
-						'button',
-						{ onClick: this.handleClose },
-						'chiudi'
+						'form',
+						{ onSubmit: this.handleSubmit },
+						_react2.default.createElement('input', { type: 'hidden', name: 'id', value: this.getValue('id', 0) }),
+						_react2.default.createElement(
+							'label',
+							null,
+							'Nome *:'
+						),
+						_react2.default.createElement('input', { type: 'text', name: 'name', value: this.getValue('name'), onChange: this.handleChange }),
+						_react2.default.createElement(
+							'label',
+							null,
+							'Note:'
+						),
+						_react2.default.createElement('textarea', { name: 'notes' }),
+						_react2.default.createElement('input', { type: 'submit', value: 'Salva' }),
+						_react2.default.createElement(
+							'button',
+							{ onClick: this.handleClose },
+							'chiudi'
+						)
 					)
-				)
-			);
+				);
+			}
 		}
 	}]);
 

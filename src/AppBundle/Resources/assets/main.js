@@ -17,5 +17,6 @@ console.log(moment().startOf('day').fromNow());
 
 $('[data-react-id="grid-row-buttons"]').each(function(i, el){
 	let rowId = $(el).attr('data-sql-id');
-	ReactDOM.render(<GridButtons id={rowId} />, el);
+	let entityUrl = $(el).attr('data-entity-url');
+	ReactDOM.render(<GridButtons id={rowId} entityUrl={entityUrl} />, el);
 });

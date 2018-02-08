@@ -31,8 +31,8 @@ services:
         
     AppBundle\Command\ServerRunExtCommand:
           arguments:
-              - %kernel.project_dir%/public
-              - %kernel.environment%
+              - '%kernel.project_dir%/public'
+              - '%kernel.environment%'
           tags: [console.command]
 
     # add more services, or override services that need manual wiring

@@ -60,4 +60,11 @@ class DefaultController extends Controller
 //     		)
     	]);
     }
+    
+    public function entityAction($what, $id) {
+    	
+    	
+    	
+    	return $this->json(array('name' => 'Pearl Jam'));
+    }
 }

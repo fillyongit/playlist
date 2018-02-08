@@ -5,30 +5,50 @@ class ArtistForm extends React.Component {
 	constructor(props) {
 	    super(props);
 
-	   	// Chiama php service per prendere i dati.
-	    let stateObj = {};
-	    stateObj['formIsVisible'] = true;
-	    stateObj['id'] = this.props.id;
-	    stateObj['name'] = 'Pearl Jam';
-
-	    this.state = stateObj;
+	    this.state = {
+	    	formIsVisible: true,
+	    	dataLoaded: false,
+	    	data: {},
+	    	error: null
+	    };
 
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleSubmit = this.handleSubmit.bind(this);
 	    this.handleClose = this.handleClose.bind(this);
-
-
-
   	}
 
-	componentWillMount() {
-	    
+	componentDidMount() {
+		// Chiama php service per prendere i dati.
+		// this.props.id
+		fetch(this.props.url, {
+		  credentials: 'same-origin'  
+		})
+		.then(res => res.json())
+		.then(
+	        (result) => {
+	          this.setState({
+	            dataLoaded: true,
+	            data: result
+	          });
+	        },
+	        // Note: it's important to handle errors here
+	        // instead of a catch() block so that we don't swallow
+	        // exceptions from actual bugs in components.
+	        (error) => {
+	          this.setState({
+	            dataLoaded: true,
+	            error
+	          });
+	        }
+	      )
 	}
 
 	 handleChange(e) {
-	 	let obj = {};
+	 	let obj = this.state.data;
 	 	obj[e.target.name] = e.target.value;
-    	this.setState(obj);
+    	this.setState({
+    		data: obj
+    	});
   	}
 
   	handleSubmit(e) {
@@ -45,25 +65,31 @@ class ArtistForm extends React.Component {
 	}
 
 	getValue(fieldName, defaultVal = '') {
-		return (this.state[fieldName] || defaultVal);
+		return ((this.state.data.hasOwnProperty(fieldName) && this.state.data[fieldName]) || defaultVal);
 	}
 
   	render() {
-	    return (
-	      <div>
-		      <form onSubmit={this.handleSubmit}>
-		      		<input type="hidden" name="id" value={this.getValue('id', 0)} />
-			       <label>Nome *:</label>
-			       <input type="text" name="name" value={this.getValue('name')} onChange={this.handleChange}  />
-			       
-			       <label>Note:</label>
-			       <textarea name="notes" />
-		        
-			       <input type="submit" value="Salva" />
-			       <button onClick={this.handleClose}>chiudi</button>
-		      </form>
-	      </div>
-	    );
+  		if (this.state.error) {
+  			return <div className="alert alert-warning" role="alert">Impossibile recuperare il dato!</div>;
+  		}  else if (!this.state.dataLoaded) {
+	    	return <div className="alert alert-primary" role="alert">Loading...</div>;
+	    } else {
+		    return (
+		      <div>
+			      <form onSubmit={this.handleSubmit}>
+			      	   <input type="hidden" name="id" value={this.getValue('id', 0)} />
+				       <label>Nome *:</label>
+				       <input type="text" name="name" value={this.getValue('name')} onChange={this.handleChange}  />
+				       
+				       <label>Note:</label>
+				       <textarea name="notes" />
+			        
+				       <input type="submit" value="Salva" />
+				       <button onClick={this.handleClose}>chiudi</button>
+			      </form>
+		      </div>
+		    );
+		}
   	}	
 }
 

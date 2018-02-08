@@ -55,10 +55,9 @@ class GridButtons extends React.Component {
   }
 
 	render() {
-
     let form = null;
     if (this.state.isEditing) {
-      form = <ArtistForm id={this.props.id} onFormClose={this.handleFormClose} />;
+      form = <ArtistForm id={this.props.id} onFormClose={this.handleFormClose} url={this.props.entityUrl} />;
     } else {
       form = null;
     }
