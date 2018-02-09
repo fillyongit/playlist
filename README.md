@@ -12,6 +12,6 @@ Eseguire sempre webpack sotto nodemodules/.bin per ricompilare sia i js che gli 
 Per fare in modo di non compilare continuamente si potrebbe far partire il task "watch": "webpack --progress --watch" presente nel package.json degli assets quando si fa partire il server di sviluppo di symfony (npm run watch).
 Per fare questo ho creato un console command custom, sotto src/AppBundle/Command: chimarlo come server:runext.
 
-Quando si fa "composer install" questo esegue lo script appAssetsInstall (vedere composer.json, post-command-install) che esegue "npm install" sotto la directory degli assets in modo da non doversi ricordare di farlo speratamente dopo aver fatto composer install. 
-Aggiungere anche "php bin/console doctrine:schema:update --force"?
+Quando si fa "composer install" questo esegue il metodo php AppBundle\Composer\ScriptHandler::appAssetsInstall (vedere composer.json, post-command-install) che esegue "npm install" sotto la directory degli assets in modo da non doversi ricordare di farlo speratamente dopo aver fatto composer install. 
+Aggiungere anche "php bin/console doctrine:schema:update --force" per fare in modo che si crei/aggiorni il db automaticamente?
  

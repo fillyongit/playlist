@@ -15,6 +15,10 @@ class Model {
 		$this->em = $em;
 	}
 	
+	public function getEntity($entityFullName) {
+		return $this->em->getRepository($entityFullName)->findAll();
+	}
+	
 	public function getCollection($entityFullName) {
 		return $this->em->getRepository($entityFullName)->findAll();
 	}

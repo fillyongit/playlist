@@ -26,9 +26,11 @@ class ArtistForm extends React.Component {
 		.then(res => res.json())
 		.then(
 	        (result) => {
+	          let error = result.error || null;
 	          this.setState({
 	            dataLoaded: true,
-	            data: result
+	            data: result,
+	            error: error
 	          });
 	        },
 	        // Note: it's important to handle errors here

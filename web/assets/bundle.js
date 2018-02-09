@@ -51614,9 +51614,11 @@ var ArtistForm = function (_React$Component) {
 			}).then(function (res) {
 				return res.json();
 			}).then(function (result) {
+				var error = result.error || null;
 				_this2.setState({
 					dataLoaded: true,
-					data: result
+					data: result,
+					error: error
 				});
 			},
 			// Note: it's important to handle errors here
