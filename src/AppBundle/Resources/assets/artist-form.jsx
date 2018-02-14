@@ -72,7 +72,7 @@ class ArtistForm extends React.Component {
 
   	render() {
   		if (this.state.error) {
-  			return <div className="alert alert-warning" role="alert">Impossibile recuperare il dato!</div>;
+  			return <div className="alert alert-warning" role="alert">{this.state.error}</div>;
   		}  else if (!this.state.dataLoaded) {
 	    	return <div className="alert alert-primary" role="alert">Loading...</div>;
 	    } else {

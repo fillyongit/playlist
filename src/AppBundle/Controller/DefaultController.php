@@ -62,9 +62,11 @@ class DefaultController extends Controller
     }
     
     public function entityAction($what, $id) {
-    	
-    	
-    	
-    	return $this->json(array('name' => 'Pearl Jam'));
+    	try {
+    		$data = $model->getEntity(Artist::class);
+    	} catch (\Exception $e) {
+    		$data['error'] = $this->translator->trans($e->getMessage());
+    	}
+    	return $this->json($data);
     }
 }
