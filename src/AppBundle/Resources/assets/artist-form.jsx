@@ -77,7 +77,7 @@ class ArtistForm extends React.Component {
 	    	return <div className="alert alert-primary" role="alert">Loading...</div>;
 	    } else {
 		    return (
-		      <div>
+		      <div className="modal fade" id="artist-form" tabIndex="4000" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			      <form onSubmit={this.handleSubmit}>
 			      	   <input type="hidden" name="id" value={this.getValue('id', 0)} />
 				       <label>Nome *:</label>
@@ -85,9 +85,11 @@ class ArtistForm extends React.Component {
 				       
 				       <label>Note:</label>
 				       <textarea name="notes" />
-			        
-				       <input type="submit" value="Salva" />
-				       <button onClick={this.handleClose}>chiudi</button>
+
+				       <div className="modal-footer">
+				        <button type="button" className="btn btn-secondary" onClick={this.handleClose}>Close</button>
+				        <input type="submit" className="btn btn-primary" value="Salva" />
+				      </div>
 			      </form>
 		      </div>
 		    );

@@ -8,4 +8,6 @@ artist: Artista
 artists: Artisti
 playlist: Playlist
 playlists: Playlist
-record_not_found: Record non trovato
+
+errors:
+     record_not_found: Record non trovato

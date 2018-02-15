@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="record")
  */
-class Record implements PlEntityInterface
+class Record extends AbstractEntity
 {
 	/**
 	 * @ORM\Column(type="integer")

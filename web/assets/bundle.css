@@ -5609,8 +5609,8 @@ a.text-dark:hover, a.text-dark:focus {
   .table-bordered th, .table-bordered td {
     border: 1px solid #ddd !important; } }
 body {
-  /* background-color: $backgroundColor; */
-  background: url(images/bck.jpg); }
+  /* background-color: $backgroundColor;
+	background: url('images/bck.jpg'); */ }
 .container {
   padding: 40px;
   background-color: #fff;

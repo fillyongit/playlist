@@ -16,10 +16,11 @@ class Model {
 	}
 	
 	public function getEntity($entityFullName, $id) {
-		$e = $this->em->getRepository($entityFullName)->find($id);
+		$e = $this->em->getRepository($entityFullName)->findOneById($id);
 		if (!$e) {
-			throw new \Exception('record_not_found');
+			throw new \Exception('errors.record_not_found');
 		}
+		return $e;
 	}
 	
 	public function getCollection($entityFullName) {

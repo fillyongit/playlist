@@ -61,9 +61,9 @@ class DefaultController extends Controller
     	]);
     }
     
-    public function entityAction($what, $id) {
+    public function entityAction($what, $id, Model $model) {
     	try {
-    		$data = $model->getEntity(Artist::class);
+    		$data = $model->getEntity(Artist::class, $id);
     	} catch (\Exception $e) {
     		$data['error'] = $this->translator->trans($e->getMessage());
     	}
