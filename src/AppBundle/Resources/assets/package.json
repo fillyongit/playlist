@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bazinga-translator": "^2.6.6",
     "bootstrap": "^4.0.0",
     "jquery": "^3.2.1",
     "moment": "^2.20.1",

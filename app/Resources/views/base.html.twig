@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale|split('_')[0] }}">
     <head>
     	<meta charset="utf-8">
    		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,7 +28,7 @@
 		        </a>
 		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 		          <a class="dropdown-item" href="{{ path('list_locale', {'_locale': app.request.getLocale(), 'what': 'songs'}) }}">{% trans %}songs{% endtrans %}</a>
-		          <a class="dropdown-item" href="{{ path('list_locale', {'_locale': app.request.getLocale(), 'what': 'artists'}) }}">{% trans %}artists{% endtrans %}</a>
+		          <a class="dropdown-item" href="{{ path('list_locale', {'_locale': app.request.getLocale(), 'what': 'artists'}) }}">{{ 'artists'|trans }}</a>
 		          <div class="dropdown-divider"></div>
 		          <a class="dropdown-item" href="#">{% trans %}playlists{% endtrans %}</a>
 		        </div>
