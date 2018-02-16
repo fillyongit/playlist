@@ -51218,29 +51218,34 @@ var GridButtons = function (_React$Component) {
     key: 'render',
     value: function render() {
       var form = null;
+      var formId = 'entity-form-' + this.props.id;
       if (this.state.isEditing) {
-        form = _react2.default.createElement(_artistForm2.default, { id: this.props.id, onFormClose: this.handleFormClose, url: this.props.entityUrl });
+        form = _react2.default.createElement(_artistForm2.default, { id: this.props.id, onFormClose: this.handleFormClose, formId: formId, url: this.props.entityUrl });
       } else {
         form = null;
       }
 
       return _react2.default.createElement(
         'div',
-        { style: { display: 'flex' } },
+        null,
         _react2.default.createElement(
-          'button',
-          { onClick: this.editArtist },
-          'M'
-        ),
-        _react2.default.createElement(
-          'button',
-          null,
-          'E'
-        ),
-        _react2.default.createElement(
-          'button',
-          { onClick: this.playArtistList, style: { color: this.state.isPlayButtonToggleOn ? 'green' : '#000' } },
-          this.state.isPlayButtonToggleOn ? 'Now playing' : 'P'
+          'div',
+          { style: { display: 'flex' } },
+          _react2.default.createElement(
+            'button',
+            { onClick: this.editArtist },
+            'M'
+          ),
+          _react2.default.createElement(
+            'button',
+            null,
+            'E'
+          ),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.playArtistList, style: { color: this.state.isPlayButtonToggleOn ? 'green' : '#000' } },
+            this.state.isPlayButtonToggleOn ? 'Now playing' : 'P'
+          )
         ),
         form
       );
@@ -51257,7 +51262,7 @@ exports.default = GridButtons;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function($) {
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -51320,6 +51325,8 @@ var ArtistForm = function (_React$Component) {
 					data: result,
 					error: error
 				});
+
+				$('#' + _this2.props.formId).modal('show');
 			},
 			// Note: it's important to handle errors here
 			// instead of a catch() block so that we don't swallow
@@ -51343,17 +51350,16 @@ var ArtistForm = function (_React$Component) {
 	}, {
 		key: 'handleSubmit',
 		value: function handleSubmit(e) {
+			// Chiama php service per salvataggio dati.
 			e.preventDefault();
 		}
 	}, {
 		key: 'handleClose',
 		value: function handleClose(e) {
+			$('#' + this.props.formId).modal('hide');
+
 			// Chiamo un metodo del componente padre.
-			console.log(this.state);
-
-			// Chiama php service per salvataggio dati.
-
-			this.props.onFormClose();
+			//this.props.onFormClose();
 		}
 	}, {
 		key: 'getValue',
@@ -51380,32 +51386,59 @@ var ArtistForm = function (_React$Component) {
 			} else {
 				return _react2.default.createElement(
 					'div',
-					{ className: 'modal fade', id: 'artist-form', tabIndex: '4000', role: 'dialog', 'aria-labelledby': 'exampleModalCenterTitle', 'aria-hidden': 'true' },
+					{ className: 'modal fade', id: this.props.formId, tabIndex: '-1', role: 'dialog', 'aria-labelledby': 'artist', 'aria-hidden': 'true' },
 					_react2.default.createElement(
-						'form',
-						{ onSubmit: this.handleSubmit },
-						_react2.default.createElement('input', { type: 'hidden', name: 'id', value: this.getValue('id', 0) }),
-						_react2.default.createElement(
-							'label',
-							null,
-							'Nome *:'
-						),
-						_react2.default.createElement('input', { type: 'text', name: 'name', value: this.getValue('name'), onChange: this.handleChange }),
-						_react2.default.createElement(
-							'label',
-							null,
-							'Note:'
-						),
-						_react2.default.createElement('textarea', { name: 'notes' }),
+						'div',
+						{ className: 'modal-dialog modal-lg' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'modal-footer' },
+							{ className: 'modal-content' },
+							_react2.default.createElement('div', { className: 'modal-header' }),
 							_react2.default.createElement(
-								'button',
-								{ type: 'button', className: 'btn btn-secondary', onClick: this.handleClose },
-								'Close'
+								'div',
+								{ className: 'modal-body' },
+								_react2.default.createElement(
+									'form',
+									null,
+									_react2.default.createElement('input', { type: 'hidden', name: 'id', value: this.getValue('id', 0) }),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-group' },
+										_react2.default.createElement(
+											'label',
+											null,
+											'Nome *:'
+										),
+										_react2.default.createElement('input', { type: 'text', name: 'name',
+											className: 'form-control', value: this.getValue('name'),
+											placeholder: 'Inserisci il nome', onChange: this.handleChange })
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-group' },
+										_react2.default.createElement(
+											'label',
+											null,
+											'Note:'
+										),
+										_react2.default.createElement('textarea', { name: 'notes', className: 'form-control' })
+									)
+								)
 							),
-							_react2.default.createElement('input', { type: 'submit', className: 'btn btn-primary', value: 'Salva' })
+							_react2.default.createElement(
+								'div',
+								{ className: 'modal-footer' },
+								_react2.default.createElement(
+									'button',
+									{ type: 'button', className: 'btn btn-secondary', onClick: this.handleClose },
+									'Close'
+								),
+								_react2.default.createElement(
+									'button',
+									{ type: 'button', className: 'btn btn-primary', onClick: this.handleSubmit },
+									'Salva'
+								)
+							)
 						)
 					)
 				);
@@ -51417,6 +51450,7 @@ var ArtistForm = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = ArtistForm;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
 /* 153 */

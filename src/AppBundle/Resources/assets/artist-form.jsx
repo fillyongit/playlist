@@ -32,6 +32,8 @@ class ArtistForm extends React.Component {
 	            data: result,
 	            error: error
 	          });
+
+	          $('#' + this.props.formId).modal('show');
 	        },
 	        // Note: it's important to handle errors here
 	        // instead of a catch() block so that we don't swallow
@@ -42,7 +44,7 @@ class ArtistForm extends React.Component {
 	            error
 	          });
 	        }
-	      )
+	    );
 	}
 
 	 handleChange(e) {
@@ -54,16 +56,15 @@ class ArtistForm extends React.Component {
   	}
 
   	handleSubmit(e) {
+  		// Chiama php service per salvataggio dati.
    	 	e.preventDefault();
   	}
 
 	handleClose(e) {
+		$('#' + this.props.formId).modal('hide');
+
 		// Chiamo un metodo del componente padre.
-		console.log(this.state);
-
-		// Chiama php service per salvataggio dati.
-
-		this.props.onFormClose();
+		//this.props.onFormClose();
 	}
 
 	getValue(fieldName, defaultVal = '') {
@@ -77,20 +78,34 @@ class ArtistForm extends React.Component {
 	    	return <div className="alert alert-primary" role="alert">Loading...</div>;
 	    } else {
 		    return (
-		      <div className="modal fade" id="artist-form" tabIndex="4000" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			      <form onSubmit={this.handleSubmit}>
-			      	   <input type="hidden" name="id" value={this.getValue('id', 0)} />
-				       <label>Nome *:</label>
-				       <input type="text" name="name" value={this.getValue('name')} onChange={this.handleChange}  />
-				       
-				       <label>Note:</label>
-				       <textarea name="notes" />
+		      <div className="modal fade" id={this.props.formId} tabIndex="-1" role="dialog" aria-labelledby="artist" aria-hidden="true">
+		      	<div className="modal-dialog modal-lg">
+			      <div className="modal-content">
+			      	  <div className="modal-header">
 
-				       <div className="modal-footer">
-				        <button type="button" className="btn btn-secondary" onClick={this.handleClose}>Close</button>
-				        <input type="submit" className="btn btn-primary" value="Salva" />
+			      	  </div>
+				      <div className="modal-body">
+					      <form>
+				      	  	<input type="hidden" name="id" value={this.getValue('id', 0)} />
+				      	  	<div className="form-group">
+					      		<label>Nome *:</label>
+					     		<input type="text" name="name" 
+					     			className="form-control" value={this.getValue('name')} 
+					     			placeholder="Inserisci il nome" onChange={this.handleChange}  />
+					       	</div>
+
+					       	<div className="form-group">
+					      		<label>Note:</label>
+					      		<textarea name="notes" className="form-control" />
+					      	</div>
+					      </form>
 				      </div>
-			      </form>
+				      <div className="modal-footer">
+					  	<button type="button" className="btn btn-secondary" onClick={this.handleClose}>Close</button>
+					  	<button type="button" className="btn btn-primary" onClick={this.handleSubmit}>Salva</button>
+					  </div>
+				  </div>
+				</div>
 		      </div>
 		    );
 		}

@@ -3,6 +3,12 @@ namespace AppBundle\Entity;
 
 abstract class AbstractEntity implements PlEntityInterface, \JsonSerializable
 {
+	/**
+	 * Restituisce una rappresentazione json di un oggetto Entity di Doctrine.
+	 * Ottiene i valori dei membri che hanno un corrispettivo getter.
+	 * 
+	 * @return json
+	 */
 	public function jsonSerialize() {
 		$json = array();
 		foreach($this as $key => $value) {

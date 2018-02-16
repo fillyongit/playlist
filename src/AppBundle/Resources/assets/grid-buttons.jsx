@@ -56,19 +56,22 @@ class GridButtons extends React.Component {
 
 	render() {
     let form = null;
+    let formId = 'entity-form-' + this.props.id;
     if (this.state.isEditing) {
-      form = <ArtistForm id={this.props.id} onFormClose={this.handleFormClose} url={this.props.entityUrl} />;
+      form = <ArtistForm id={this.props.id} onFormClose={this.handleFormClose} formId={formId} url={this.props.entityUrl} />;
     } else {
       form = null;
     }
 
 		return (
-      <div style={{display:'flex'}}>
-        <button onClick={this.editArtist}>M</button>
-        <button>E</button>
-        <button onClick={this.playArtistList} style={{color:this.state.isPlayButtonToggleOn?'green':'#000'}}>
-          {this.state.isPlayButtonToggleOn ? 'Now playing' : 'P'}
-        </button>
+      <div>
+        <div style={{display:'flex'}}>
+          <button onClick={this.editArtist}>M</button>
+          <button>E</button>
+          <button onClick={this.playArtistList} style={{color:this.state.isPlayButtonToggleOn?'green':'#000'}}>
+            {this.state.isPlayButtonToggleOn ? 'Now playing' : 'P'}
+          </button>
+        </div>
         {form}
       </div>
     );
