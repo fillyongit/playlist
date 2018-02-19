@@ -33,6 +33,7 @@ class ArtistForm extends React.Component {
 	            error: error
 	          });
 
+	          // Mostro il form di edit.
 	          $('#' + this.props.formId).modal('show');
 	        },
 	        // Note: it's important to handle errors here
@@ -61,10 +62,11 @@ class ArtistForm extends React.Component {
   	}
 
 	handleClose(e) {
+		// Chiudo  il form di edit.
 		$('#' + this.props.formId).modal('hide');
 
 		// Chiamo un metodo del componente padre.
-		//this.props.onFormClose();
+		this.props.onFormClose();
 	}
 
 	getValue(fieldName, defaultVal = '') {
@@ -88,7 +90,7 @@ class ArtistForm extends React.Component {
 					      <form>
 				      	  	<input type="hidden" name="id" value={this.getValue('id', 0)} />
 				      	  	<div className="form-group">
-					      		<label>Nome *:</label>
+					      		<label>{Translator.trans('form.name')} *:</label>
 					     		<input type="text" name="name" 
 					     			className="form-control" value={this.getValue('name')} 
 					     			placeholder="Inserisci il nome" onChange={this.handleChange}  />

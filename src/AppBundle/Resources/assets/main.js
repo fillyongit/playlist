@@ -3,8 +3,6 @@ import 'bootstrap';
 // si potrebbero anche importare in plugin indivuidualmente come:
 // import 'bootstrap/js/dist/util';
 
-import Translator from 'bazinga-translator';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import GridButtons from './grid-buttons.jsx';
@@ -22,3 +20,5 @@ $('[data-react-id="grid-row-buttons"]').each(function(i, el){
 	let entityUrl = $(el).attr('data-entity-url');
 	ReactDOM.render(<GridButtons id={rowId} entityUrl={entityUrl} />, el);
 });
+
+console.log(Translator.trans('form.name'));

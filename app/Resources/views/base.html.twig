@@ -54,6 +54,8 @@
         </div>
         
         {% block javascripts %}
+        	<script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+        	<script src="{{ url('bazinga_jstranslation_js') }}"></script>
 			<script src="{{ asset('assets/bundle.js') }}"></script>
         {% endblock %}
     </body>
