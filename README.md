@@ -15,5 +15,5 @@ Per fare questo ho creato un console command custom, sotto src/AppBundle/Command
 Quando si fa "composer install" questo esegue il metodo php AppBundle\Composer\ScriptHandler::appAssetsInstall (vedere composer.json, post-command-install) che esegue "npm install" sotto la directory degli assets in modo da non doversi ricordare di farlo speratamente dopo aver fatto composer install. 
 Aggiungere anche "php bin/console doctrine:schema:update --force" per fare in modo che si crei/aggiorni il db automaticamente?
 
-Per adesso per le traduzioni usate nei jsx di React uso la libreria BazingaJsTranslationBundle. L'unica cosa è che per caricarla non ho potuto importare il modulo che ho scaricato tramite npm sotto node_modules perchè la classe Translator, di cui ha bisogno lo script caricato tramite "bazinga_jstranslation_js" che carica tutti i file locale, è disponibile solo nel main.js. Ho quindi dovuto caricarlo normalmente nel base.html.twig
- 
+Per adesso per le traduzioni usate nei jsx di React uso la libreria BazingaJsTranslationBundle. L'unica cosa è che per caricarla non ho potuto importare il modulo che ho scaricato tramite npm sotto node_modules perchè la classe Translator, di cui ha bisogno lo script caricato tramite "bazinga_jstranslation_js" che carica tutti i file locale, è disponibile solo nel main.js. Ho quindi dovuto caricarlo normalmente nel base.html.twig.
+
