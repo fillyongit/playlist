@@ -20,5 +20,3 @@ $('[data-react-id="grid-row-buttons"]').each(function(i, el){
 	let entityUrl = $(el).attr('data-entity-url');
 	ReactDOM.render(<GridButtons id={rowId} entityUrl={entityUrl} />, el);
 });
-
-console.log(Translator.trans('form.name'));

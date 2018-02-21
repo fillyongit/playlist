@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -14,16 +15,32 @@ class Record extends AbstractEntity
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
-	private $id;
+	protected $id;
 	
 	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
-	private $name;
+	protected $name;
 	
 	/**
-	 * Many Users have Many Groups.
-	 * @ORM\ManyToMany(targetEntity="Artist", mappedBy="records")
+	 * @ORM\ManyToMany(targetEntity="Artist", inversedBy="records")
+	 * @ORM\JoinTable(name="artist_records")
 	 */
-	private $artists;
+	protected $artists;
+	
+	public function __construct() {
+		$this->artists = new ArrayCollection();
+	}
+	
+	public function getName() {
+		return $this->name;
+	}
+	
+	public function getId() {
+		return $this->id;
+	}
+	
+	public function getArtists() {
+		return $this->artists;
+	}
 }

@@ -21,7 +21,7 @@
     <div class="col-2" 
     	data-react-id="grid-row-buttons" 
     	data-sql-id="{{ row.id }}" 
-    	data-entity-url="{{ path('entity_locale', {'_locale': app.request.getLocale(), 'what': 'artists', id: row.id}) }}">
+    	data-entity-url="{{ path('entity_locale', {'what': 'artists', id: row.id}) }}">
     </div>
   </div>
   {% endfor  %}

@@ -18,6 +18,10 @@ class ArtistForm extends React.Component {
   	}
 
 	componentDidMount() {
+
+		// Ottiene alcuni dizionari.
+		this.records = [{"id": 1, "name": "Ten"}];
+
 		// Chiama php service per prendere i dati.
 		// this.props.id
 		fetch(this.props.url, {
@@ -50,6 +54,7 @@ class ArtistForm extends React.Component {
 
 	 handleChange(e) {
 	 	let obj = this.state.data;
+	 	console.log(e.target.value);
 	 	obj[e.target.name] = e.target.value;
     	this.setState({
     		data: obj
@@ -57,6 +62,14 @@ class ArtistForm extends React.Component {
   	}
 
   	handleSubmit(e) {
+  		// Validazione.
+  		let form = $('#artist-form');
+        if ($('#artist-form').get( 0 ).checkValidity() === false) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        $('#artist-form').addClass('was-validated');
+
   		// Chiama php service per salvataggio dati.
    	 	e.preventDefault();
   	}
@@ -73,6 +86,17 @@ class ArtistForm extends React.Component {
 		return ((this.state.data.hasOwnProperty(fieldName) && this.state.data[fieldName]) || defaultVal);
 	}
 
+/*
+	getRelCollectionId(fieldName) {
+		let values = (this.state.data.hasOwnProperty(fieldName) && this.state.data[fieldName]) || [];
+		let ids = [];
+		values.forEach(function(el){
+			ids.push(el.id);
+		});
+		return ids;
+	}
+*/
+
   	render() {
   		if (this.state.error) {
   			return <div className="alert alert-warning" role="alert">{this.state.error}</div>;
@@ -87,17 +111,40 @@ class ArtistForm extends React.Component {
 
 			      	  </div>
 				      <div className="modal-body">
-					      <form>
+					      <form id="artist-form" className="needs-validation">
 				      	  	<input type="hidden" name="id" value={this.getValue('id', 0)} />
 				      	  	<div className="form-group">
 					      		<label>{Translator.trans('form.name')} *:</label>
 					     		<input type="text" name="name" 
 					     			className="form-control" value={this.getValue('name')} 
-					     			placeholder="Inserisci il nome" onChange={this.handleChange}  />
+					     			placeholder={Translator.trans('form.name_ph')} onChange={this.handleChange} required />
+					     		 <div className="valid-feedback">{Translator.trans('form.name_required')}</div>
 					       	</div>
-
+				      	  	<div className="form-group">
+					      		<label>{Translator.trans('form.surname')} *:</label>
+					     		<input type="text" name="surname" 
+					     			className="form-control" value={this.getValue('surname')} 
+					     			placeholder={Translator.trans('form.surname_ph')} onChange={this.handleChange} required />
+					     		<div className="valid-feedback">{Translator.trans('form.surname_required')}</div>
+					       	</div>
+				      	  	<div className="form-group">
+					      		<label>{Translator.trans('form.birthdate')} *:</label>
+					     		<input type="text" name="surname" 
+					     			className="form-control" value={this.getValue('birthdate')} 
+					     			placeholder={Translator.trans('form.birthdate_ph')} onChange={this.handleChange} required />
+					     		<div className="valid-feedback">{Translator.trans('form.birthdate_required')}</div>
+					       	</div>
 					       	<div className="form-group">
-					      		<label>Note:</label>
+					       		<label htmlFor="artist-form-records">{Translator.trans('form.records')}</label>
+						       	<select name="records" id="artist-form-records" multiple={true} className="form-control"
+						       		value={this.getValue('records')} onChange={this.handleChange}>
+						       		{this.getValue('recordsEntities').map((record) => 
+							    		<option key={record.id} value={record.id}>{record.name}</option>
+							    	)}
+						       	</select>
+						    </div>
+					       	<div className="form-group">
+					      		<label>{Translator.trans('form.notes')}:</label>
 					      		<textarea name="notes" className="form-control" />
 					      	</div>
 					      </form>

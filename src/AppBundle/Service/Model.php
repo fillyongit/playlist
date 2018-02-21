@@ -16,7 +16,7 @@ class Model {
 	}
 	
 	public function getEntity($entityFullName, $id) {
-		$e = $this->em->getRepository($entityFullName)->findOneById($id);
+		$e = $this->em->getRepository($entityFullName)->findFullOneById($id);
 		if (!$e) {
 			throw new \Exception('errors.record_not_found');
 		}

@@ -2,9 +2,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ArtistRepository")
  * @ORM\Table(name="artist")
  */
 class Artist extends AbstractEntity
@@ -32,8 +33,7 @@ class Artist extends AbstractEntity
 	protected $notes;
 	
 	/**
-	 * @ORM\ManyToMany(targetEntity="Record", inversedBy="artists")
-	 * @ORM\JoinTable(name="artist_records")
+	 * @ORM\ManyToMany(targetEntity="Record", mappedBy="artists")
 	 */
 	protected $records;
 	
@@ -42,6 +42,10 @@ class Artist extends AbstractEntity
 	 */
 	protected $birthDate;
 
+	public function __construct() {
+		$this->records = new ArrayCollection();
+	}
+	
 	public function getId() {
 		return $this->id;
 	}
@@ -56,5 +60,9 @@ class Artist extends AbstractEntity
 	
 	public function getBirthDate() {
 		return $this->birthDate->format('d-m-Y');
+	}
+	
+	public function getRecords() {
+		return $this->records;
 	}
 }

@@ -27487,8 +27487,6 @@ $('[data-react-id="grid-row-buttons"]').each(function (i, el) {
 	var entityUrl = $(el).attr('data-entity-url');
 	_reactDom2.default.render(_react2.default.createElement(_gridButtons2.default, { id: rowId, entityUrl: entityUrl }), el);
 });
-
-console.log(Translator.trans('form.name'));
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
@@ -51315,6 +51313,9 @@ var ArtistForm = function (_React$Component) {
 		value: function componentDidMount() {
 			var _this2 = this;
 
+			// Ottiene alcuni dizionari.
+			this.records = [{ "id": 1, "name": "Ten" }];
+
 			// Chiama php service per prendere i dati.
 			// this.props.id
 			fetch(this.props.url, {
@@ -51346,6 +51347,7 @@ var ArtistForm = function (_React$Component) {
 		key: 'handleChange',
 		value: function handleChange(e) {
 			var obj = this.state.data;
+			console.log(e.target.value);
 			obj[e.target.name] = e.target.value;
 			this.setState({
 				data: obj
@@ -51354,6 +51356,14 @@ var ArtistForm = function (_React$Component) {
 	}, {
 		key: 'handleSubmit',
 		value: function handleSubmit(e) {
+			// Validazione.
+			var form = $('#artist-form');
+			if ($('#artist-form').get(0).checkValidity() === false) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
+			$('#artist-form').addClass('was-validated');
+
 			// Chiama php service per salvataggio dati.
 			e.preventDefault();
 		}
@@ -51373,6 +51383,18 @@ var ArtistForm = function (_React$Component) {
 
 			return this.state.data.hasOwnProperty(fieldName) && this.state.data[fieldName] || defaultVal;
 		}
+
+		/*
+  	getRelCollectionId(fieldName) {
+  		let values = (this.state.data.hasOwnProperty(fieldName) && this.state.data[fieldName]) || [];
+  		let ids = [];
+  		values.forEach(function(el){
+  			ids.push(el.id);
+  		});
+  		return ids;
+  	}
+  */
+
 	}, {
 		key: 'render',
 		value: function render() {
@@ -51404,7 +51426,7 @@ var ArtistForm = function (_React$Component) {
 								{ className: 'modal-body' },
 								_react2.default.createElement(
 									'form',
-									null,
+									{ id: 'artist-form', className: 'needs-validation' },
 									_react2.default.createElement('input', { type: 'hidden', name: 'id', value: this.getValue('id', 0) }),
 									_react2.default.createElement(
 										'div',
@@ -51417,7 +51439,12 @@ var ArtistForm = function (_React$Component) {
 										),
 										_react2.default.createElement('input', { type: 'text', name: 'name',
 											className: 'form-control', value: this.getValue('name'),
-											placeholder: 'Inserisci il nome', onChange: this.handleChange })
+											placeholder: Translator.trans('form.name_ph'), onChange: this.handleChange, required: true }),
+										_react2.default.createElement(
+											'div',
+											{ className: 'valid-feedback' },
+											Translator.trans('form.name_required')
+										)
 									),
 									_react2.default.createElement(
 										'div',
@@ -51425,7 +51452,65 @@ var ArtistForm = function (_React$Component) {
 										_react2.default.createElement(
 											'label',
 											null,
-											'Note:'
+											Translator.trans('form.surname'),
+											' *:'
+										),
+										_react2.default.createElement('input', { type: 'text', name: 'surname',
+											className: 'form-control', value: this.getValue('surname'),
+											placeholder: Translator.trans('form.surname_ph'), onChange: this.handleChange, required: true }),
+										_react2.default.createElement(
+											'div',
+											{ className: 'valid-feedback' },
+											Translator.trans('form.surname_required')
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-group' },
+										_react2.default.createElement(
+											'label',
+											null,
+											Translator.trans('form.birthdate'),
+											' *:'
+										),
+										_react2.default.createElement('input', { type: 'text', name: 'surname',
+											className: 'form-control', value: this.getValue('birthdate'),
+											placeholder: Translator.trans('form.birthdate_ph'), onChange: this.handleChange, required: true }),
+										_react2.default.createElement(
+											'div',
+											{ className: 'valid-feedback' },
+											Translator.trans('form.birthdate_required')
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-group' },
+										_react2.default.createElement(
+											'label',
+											{ htmlFor: 'artist-form-records' },
+											Translator.trans('form.records')
+										),
+										_react2.default.createElement(
+											'select',
+											{ name: 'records', id: 'artist-form-records', multiple: true, className: 'form-control',
+												value: this.getValue('records'), onChange: this.handleChange },
+											this.getValue('recordsEntities').map(function (record) {
+												return _react2.default.createElement(
+													'option',
+													{ key: record.id, value: record.id },
+													record.name
+												);
+											})
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-group' },
+										_react2.default.createElement(
+											'label',
+											null,
+											Translator.trans('form.notes'),
+											':'
 										),
 										_react2.default.createElement('textarea', { name: 'notes', className: 'form-control' })
 									)
