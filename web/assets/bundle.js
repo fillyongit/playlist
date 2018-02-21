@@ -51473,7 +51473,7 @@ var ArtistForm = function (_React$Component) {
 											Translator.trans('form.birthdate'),
 											' *:'
 										),
-										_react2.default.createElement('input', { type: 'text', name: 'surname',
+										_react2.default.createElement('input', { type: 'date', name: 'surname',
 											className: 'form-control', value: this.getValue('birthdate'),
 											placeholder: Translator.trans('form.birthdate_ph'), onChange: this.handleChange, required: true }),
 										_react2.default.createElement(

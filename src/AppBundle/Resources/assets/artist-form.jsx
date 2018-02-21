@@ -129,7 +129,7 @@ class ArtistForm extends React.Component {
 					       	</div>
 				      	  	<div className="form-group">
 					      		<label>{Translator.trans('form.birthdate')} *:</label>
-					     		<input type="text" name="surname" 
+					     		<input type="date" name="surname" 
 					     			className="form-control" value={this.getValue('birthdate')} 
 					     			placeholder={Translator.trans('form.birthdate_ph')} onChange={this.handleChange} required />
 					     		<div className="valid-feedback">{Translator.trans('form.birthdate_required')}</div>

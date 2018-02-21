@@ -59,7 +59,7 @@ class Artist extends AbstractEntity
 	}
 	
 	public function getBirthDate() {
-		return $this->birthDate->format('d-m-Y');
+		return $this->birthDate->format('Y-m-d');
 	}
 	
 	public function getRecords() {
