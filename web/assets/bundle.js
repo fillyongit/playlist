@@ -51453,16 +51453,11 @@ var ArtistForm = function (_React$Component) {
 											'label',
 											null,
 											Translator.trans('form.surname'),
-											' *:'
+											':'
 										),
 										_react2.default.createElement('input', { type: 'text', name: 'surname',
 											className: 'form-control', value: this.getValue('surname'),
-											placeholder: Translator.trans('form.surname_ph'), onChange: this.handleChange, required: true }),
-										_react2.default.createElement(
-											'div',
-											{ className: 'valid-feedback' },
-											Translator.trans('form.surname_required')
-										)
+											placeholder: Translator.trans('form.surname_ph'), onChange: this.handleChange })
 									),
 									_react2.default.createElement(
 										'div',

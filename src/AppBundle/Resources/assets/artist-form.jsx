@@ -121,11 +121,10 @@ class ArtistForm extends React.Component {
 					     		 <div className="valid-feedback">{Translator.trans('form.name_required')}</div>
 					       	</div>
 				      	  	<div className="form-group">
-					      		<label>{Translator.trans('form.surname')} *:</label>
+					      		<label>{Translator.trans('form.surname')}:</label>
 					     		<input type="text" name="surname" 
 					     			className="form-control" value={this.getValue('surname')} 
-					     			placeholder={Translator.trans('form.surname_ph')} onChange={this.handleChange} required />
-					     		<div className="valid-feedback">{Translator.trans('form.surname_required')}</div>
+					     			placeholder={Translator.trans('form.surname_ph')} onChange={this.handleChange} />
 					       	</div>
 				      	  	<div className="form-group">
 					      		<label>{Translator.trans('form.birthdate')} *:</label>
