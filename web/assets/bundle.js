@@ -27463,24 +27463,19 @@ var _gridButtons = __webpack_require__(152);
 
 var _gridButtons2 = _interopRequireDefault(_gridButtons);
 
-var _moment = __webpack_require__(0);
-
-var _moment2 = _interopRequireDefault(_moment);
-
 __webpack_require__(156);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Entry point css. Dentro importa gli stili di boostrap.
 
-// var moment = require('moment');
-$(document).ready(function () {
-	console.log('jQuery works!');
-});
 // si potrebbero anche importare in plugin indivuidualmente come:
 // import 'bootstrap/js/dist/util';
 
-console.log((0, _moment2.default)().startOf('day').fromNow());
+$(document).ready(function () {
+	console.log('jQuery works!');
+}); // var moment = require('moment');
+
 
 $('[data-react-id="grid-row-buttons"]').each(function (i, el) {
 	var rowId = $(el).attr('data-sql-id');
@@ -51279,6 +51274,10 @@ var _reactDom = __webpack_require__(9);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -51468,9 +51467,9 @@ var ArtistForm = function (_React$Component) {
 											Translator.trans('form.birthdate'),
 											' *:'
 										),
-										_react2.default.createElement('input', { type: 'date', name: 'surname',
+										_react2.default.createElement('input', { type: 'date', name: 'birthdate',
 											className: 'form-control', value: this.getValue('birthdate'),
-											placeholder: Translator.trans('form.birthdate_ph'), onChange: this.handleChange, required: true }),
+											placeholder: Translator.trans('form.birthdate_ph'), onChange: this.handleChange, max: (0, _moment2.default)().format('YYYY-MM-DD'), required: true }),
 										_react2.default.createElement(
 											'div',
 											{ className: 'valid-feedback' },

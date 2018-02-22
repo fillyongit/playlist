@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import moment from 'moment';
 
 class ArtistForm extends React.Component {
 	constructor(props) {
@@ -128,9 +129,9 @@ class ArtistForm extends React.Component {
 					       	</div>
 				      	  	<div className="form-group">
 					      		<label>{Translator.trans('form.birthdate')} *:</label>
-					     		<input type="date" name="surname" 
+					     		<input type="date" name="birthdate" 
 					     			className="form-control" value={this.getValue('birthdate')} 
-					     			placeholder={Translator.trans('form.birthdate_ph')} onChange={this.handleChange} required />
+					     			placeholder={Translator.trans('form.birthdate_ph')} onChange={this.handleChange} max={moment().format('YYYY-MM-DD')} required />
 					     		<div className="valid-feedback">{Translator.trans('form.birthdate_required')}</div>
 					       	</div>
 					       	<div className="form-group">

@@ -62,6 +62,10 @@ class Artist extends AbstractEntity
 		return $this->birthDate->format('Y-m-d');
 	}
 	
+	public function getLocaleBirthDate() {
+		return strftime('%x', $this->birthDate->getTimestamp());
+	}
+	
 	public function getRecords() {
 		return $this->records;
 	}

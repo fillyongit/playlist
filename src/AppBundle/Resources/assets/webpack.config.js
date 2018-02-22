@@ -29,17 +29,19 @@ module.exports = {
 			          //resolve-url-loader may be chained before sass-loader if necessary
 			          use: [{
 			            loader: "css-loader" // translates CSS into CommonJS
-			          }, {
-			              loader: 'postcss-loader', // Run post css actions
-			              options: {
-			                plugins: function () { // post css plugins, can be exported to postcss.config.js
+			          }, 
+			          {
+			            loader: 'postcss-loader', // Run post css actions
+			            options: {
+			               plugins: function () { // post css plugins, can be exported to postcss.config.js
 			                  return [
 			                    require('precss'),
 			                    require('autoprefixer')
 			                  ];
-			                }
-			              }
-			            }, {
+			               }
+			            }
+			          }, 
+			          {
 			            loader: "sass-loader" // compiles Sass to CSS
 			          }]
 			        })

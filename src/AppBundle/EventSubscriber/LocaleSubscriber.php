@@ -30,7 +30,10 @@ class LocaleSubscriber implements EventSubscriberInterface
 			// if no explicit locale has been set on this request, use one from the session
 			// var_dump($session_locale);
 			$request->setLocale($session_locale);
+			$locale = $session_locale;
 		}
+		
+		setlocale(LC_TIME, $locale);
 	}
 	
 	public static function getSubscribedEvents()

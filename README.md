@@ -17,3 +17,7 @@ Aggiungere anche "php bin/console doctrine:schema:update --force" per fare in mo
 
 Per adesso per le traduzioni usate nei jsx di React uso la libreria BazingaJsTranslationBundle. L'unica cosa è che per caricarla non ho potuto importare il modulo che ho scaricato tramite npm sotto node_modules perchè la classe Translator, di cui ha bisogno lo script caricato tramite "bazinga_jstranslation_js" che carica tutti i file locale, è disponibile solo nel main.js. Ho quindi dovuto caricarlo normalmente nel base.html.twig.
 
+Nel src\AppBundle\EventSubscriber\LocaleSubscriber viene fatto il setlocale(LC_TIME).
+
+Uso la libreria javascript moment per formattare le date lato client.
+
