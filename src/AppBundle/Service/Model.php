@@ -26,4 +26,13 @@ class Model {
 	public function getCollection($entityFullName) {
 		return $this->em->getRepository($entityFullName)->findAll();
 	}
+	
+	public function saveEntity($entityFullName, $id, $data) {
+		die(var_dump($data));
+		$e = $this->em->getRepository($entityFullName)->save($id, $data);
+		if (!$e) {
+			throw new \Exception('errors.record_not_saved');
+		}
+		return $e;
+	}
 }

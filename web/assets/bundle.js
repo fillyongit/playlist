@@ -27480,7 +27480,8 @@ $(document).ready(function () {
 $('[data-react-id="grid-row-buttons"]').each(function (i, el) {
 	var rowId = $(el).attr('data-sql-id');
 	var entityUrl = $(el).attr('data-entity-url');
-	_reactDom2.default.render(_react2.default.createElement(_gridButtons2.default, { id: rowId, entityUrl: entityUrl }), el);
+	var saveUrl = $(el).attr('data-save-url');
+	_reactDom2.default.render(_react2.default.createElement(_gridButtons2.default, { id: rowId, entityUrl: entityUrl, saveUrl: saveUrl }), el);
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
@@ -51216,7 +51217,7 @@ var GridButtons = function (_React$Component) {
       var form = null;
       var formId = 'entity-form-' + this.props.id;
       if (this.state.isEditing) {
-        form = _react2.default.createElement(_artistForm2.default, { id: this.props.id, onFormClose: this.handleFormClose, formId: formId, url: this.props.entityUrl });
+        form = _react2.default.createElement(_artistForm2.default, { id: this.props.id, onFormClose: this.handleFormClose, formId: formId, url: this.props.entityUrl, saveUrl: this.props.saveUrl });
       } else {
         form = null;
       }
@@ -51356,14 +51357,21 @@ var ArtistForm = function (_React$Component) {
 		key: 'handleSubmit',
 		value: function handleSubmit(e) {
 			// Validazione.
-			var form = $('#artist-form');
-			if ($('#artist-form').get(0).checkValidity() === false) {
+			var $form = $('#artist-form');
+			if ($form.get(0).checkValidity() === false) {
 				e.preventDefault();
 				e.stopPropagation();
 			}
-			$('#artist-form').addClass('was-validated');
+			$form.addClass('was-validated');
 
 			// Chiama php service per salvataggio dati.
+			var data = new FormData($form.get(0));
+
+			fetch(this.props.saveUrl, {
+				method: "POST",
+				body: data
+			});
+
 			e.preventDefault();
 		}
 	}, {
@@ -51371,6 +51379,10 @@ var ArtistForm = function (_React$Component) {
 		value: function handleClose(e) {
 			// Chiudo  il form di edit.
 			$('#' + this.props.formId).modal('hide');
+
+			this.setState({
+				dataLoaded: false
+			});
 
 			// Chiamo un metodo del componente padre.
 			this.props.onFormClose();
@@ -51486,7 +51498,7 @@ var ArtistForm = function (_React$Component) {
 										),
 										_react2.default.createElement(
 											'select',
-											{ name: 'records', id: 'artist-form-records', multiple: true, className: 'form-control',
+											{ name: 'records[]', id: 'artist-form-records', multiple: true, className: 'form-control',
 												value: this.getValue('records'), onChange: this.handleChange },
 											this.getValue('recordsEntities').map(function (record) {
 												return _react2.default.createElement(

@@ -14,5 +14,6 @@ $(document).ready(function() { console.log('jQuery works!'); } );
 $('[data-react-id="grid-row-buttons"]').each(function(i, el){
 	let rowId = $(el).attr('data-sql-id');
 	let entityUrl = $(el).attr('data-entity-url');
-	ReactDOM.render(<GridButtons id={rowId} entityUrl={entityUrl} />, el);
+	let saveUrl = $(el).attr('data-save-url');
+	ReactDOM.render(<GridButtons id={rowId} entityUrl={entityUrl} saveUrl={saveUrl} />, el);
 });

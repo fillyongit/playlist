@@ -31,3 +31,7 @@ entity_locale:
     defaults:  { _controller: AppBundle:Default:entity, what: '%app.list_default%', id: '0' }
     requirements:
        _locale: '%app.locales%'
+       
+entity_save:
+    path:      /save/{what}/{id}
+    defaults:  { _controller: AppBundle:Default:saveEntity, what: '%app.list_default%', id: '0' }

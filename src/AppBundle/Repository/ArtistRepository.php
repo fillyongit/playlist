@@ -20,4 +20,11 @@ class ArtistRepository extends EntityRepository
 			return null;
 		}
 	}
+	
+	public function save($id, $data) {		
+		$em = $this->getEntityManager();
+		$artist = $this->find($id);
+		$artist->setName($data['name']);
+		$em->flush();
+	}
 }

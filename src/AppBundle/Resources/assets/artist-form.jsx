@@ -53,7 +53,7 @@ class ArtistForm extends React.Component {
 	    );
 	}
 
-	 handleChange(e) {
+	handleChange(e) {
 	 	let obj = this.state.data;
 	 	console.log(e.target.value);
 	 	obj[e.target.name] = e.target.value;
@@ -64,20 +64,31 @@ class ArtistForm extends React.Component {
 
   	handleSubmit(e) {
   		// Validazione.
-  		let form = $('#artist-form');
-        if ($('#artist-form').get( 0 ).checkValidity() === false) {
+  		let $form = $('#artist-form');
+        if ($form.get(0).checkValidity() === false) {
           e.preventDefault();
           e.stopPropagation();
         }
-        $('#artist-form').addClass('was-validated');
+        $form.addClass('was-validated');
 
   		// Chiama php service per salvataggio dati.
+		let data = new FormData($form.get(0));
+
+		fetch(this.props.saveUrl, {
+		  method: "POST",
+		  body: data
+		});
+
    	 	e.preventDefault();
   	}
 
 	handleClose(e) {
 		// Chiudo  il form di edit.
 		$('#' + this.props.formId).modal('hide');
+
+	    this.setState({
+	        dataLoaded: false
+	    });
 
 		// Chiamo un metodo del componente padre.
 		this.props.onFormClose();
@@ -136,7 +147,7 @@ class ArtistForm extends React.Component {
 					       	</div>
 					       	<div className="form-group">
 					       		<label htmlFor="artist-form-records">{Translator.trans('form.records')}</label>
-						       	<select name="records" id="artist-form-records" multiple={true} className="form-control"
+						       	<select name="records[]" id="artist-form-records" multiple={true} className="form-control"
 						       		value={this.getValue('records')} onChange={this.handleChange}>
 						       		{this.getValue('recordsEntities').map((record) => 
 							    		<option key={record.id} value={record.id}>{record.name}</option>
