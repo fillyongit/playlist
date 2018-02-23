@@ -2,6 +2,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\Record;
 
 class ArtistRepository extends EntityRepository
 {
@@ -17,14 +18,29 @@ class ArtistRepository extends EntityRepository
 		try {
 			return $query->getOneOrNullResult();
 		} catch (\Doctrine\ORM\NoResultException $e) {
-			return null;
+			throw $e;
 		}
 	}
 	
-	public function save($id, $data) {		
-		$em = $this->getEntityManager();
-		$artist = $this->find($id);
-		$artist->setName($data['name']);
-		$em->flush();
+	public function save($id, $data) {
+		try {
+			$em = $this->getEntityManager();
+			$artist = $this->find($id);
+			$artist->setName($data['name']);
+			$artist->setBirthDate($data['birthdate']);
+
+			foreach($data['records'] as $idRecord) {
+				$record = $em->getRepository(Record::class)->find($idRecord);
+				if (!$artist->getRecords()->contains($record)) {
+					$artist->addRecord($record);
+				}
+			}
+			
+			$em->flush();
+			
+			return $id;
+		} catch (\Doctrine\ORM\ORMException $e) {
+			throw $e;
+		}
 	}
 }

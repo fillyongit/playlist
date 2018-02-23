@@ -43,4 +43,9 @@ class Record extends AbstractEntity
 	public function getArtists() {
 		return $this->artists;
 	}
+	
+	public function addArtist(Artist $artist)
+	{
+		$this->artists[] = $artist;
+	}
 }

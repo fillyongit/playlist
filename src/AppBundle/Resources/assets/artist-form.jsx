@@ -8,6 +8,7 @@ class ArtistForm extends React.Component {
 
 	    this.state = {
 	    	formIsVisible: true,
+	    	dataSaved: false,
 	    	dataLoaded: false,
 	    	data: {},
 	    	error: null
@@ -20,8 +21,10 @@ class ArtistForm extends React.Component {
 
 	componentDidMount() {
 
+		$('#' + this.props.formId).modal('show');
+
 		// Ottiene alcuni dizionari.
-		this.records = [{"id": 1, "name": "Ten"}];
+
 
 		// Chiama php service per prendere i dati.
 		// this.props.id
@@ -33,21 +36,18 @@ class ArtistForm extends React.Component {
 	        (result) => {
 	          let error = result.error || null;
 	          this.setState({
-	            dataLoaded: true,
+	            dataLoaded: error ? false : true,
 	            data: result,
 	            error: error
 	          });
-
-	          // Mostro il form di edit.
-	          $('#' + this.props.formId).modal('show');
 	        },
 	        // Note: it's important to handle errors here
 	        // instead of a catch() block so that we don't swallow
 	        // exceptions from actual bugs in components.
 	        (error) => {
 	          this.setState({
-	            dataLoaded: true,
-	            error
+	            dataLoaded: false,
+	            error: error.message
 	          });
 	        }
 	    );
@@ -65,19 +65,45 @@ class ArtistForm extends React.Component {
   	handleSubmit(e) {
   		// Validazione.
   		let $form = $('#artist-form');
+        let isValid = true;
         if ($form.get(0).checkValidity() === false) {
           e.preventDefault();
           e.stopPropagation();
+          isValid = false;
         }
         $form.addClass('was-validated');
 
+        if (!isValid) {
+        	return;
+        }
+console.log(this.state.data);
   		// Chiama php service per salvataggio dati.
 		let data = new FormData($form.get(0));
 
 		fetch(this.props.saveUrl, {
 		  method: "POST",
-		  body: data
-		});
+		  body: data,
+		  credentials: 'same-origin'
+		})
+		.then(res => res.json())
+		.then(
+	        (result) => {
+	          let error = result.error || null;
+	          this.setState({
+	            dataSaved: error ? false : true,
+	            error: error
+	          });
+	        },
+	        // Note: it's important to handle errors here
+	        // instead of a catch() block so that we don't swallow
+	        // exceptions from actual bugs in components.
+	        (error) => {
+	          this.setState({
+	            dataSaved: false,
+	            error: error.message
+	          });
+	        }
+		);
 
    	 	e.preventDefault();
   	}
@@ -110,19 +136,43 @@ class ArtistForm extends React.Component {
 */
 
   	render() {
+  		let content = null;
   		if (this.state.error) {
-  			return <div className="alert alert-warning" role="alert">{this.state.error}</div>;
+  			content = (
+  				<div>
+	      	 		<div className="modal-header"></div>
+	      	 		<div className="modal-body">
+							<div className="alert alert-warning" role="alert">{this.state.error}</div>
+						</div>
+						<div className="modal-footer">
+			  			<button type="button" className="btn btn-secondary" onClick={this.handleClose}>{Translator.trans('close')}</button>
+			  		</div>
+		  		</div>
+  			);
   		}  else if (!this.state.dataLoaded) {
-	    	return <div className="alert alert-primary" role="alert">Loading...</div>;
+	    	content = (
+	      	 		<div>
+		      	 		<div className="modal-header"></div>
+		      	 		<div className="modal-body">
+							<div className="alert alert-primary" role="alert">{Translator.trans('loading')}</div>
+				  		</div>
+				  	</div>
+	    	);
 	    } else {
-		    return (
-		      <div className="modal fade" id={this.props.formId} tabIndex="-1" role="dialog" aria-labelledby="artist" aria-hidden="true">
-		      	<div className="modal-dialog modal-lg">
-			      <div className="modal-content">
-			      	  <div className="modal-header">
+	    	let dataSavedMsg = null;
+	    	if (this.state.dataSaved) {
+				dataSavedMsg = (
+					<div className="alert alert-success" role="alert">
+					 	{Translator.trans('form.save.ok')}
+					</div>
+				);
+	    	}
 
-			      	  </div>
+		    content = (
+		    	  	<div>
+			      	  <div className="modal-header"></div>
 				      <div className="modal-body">
+				      	  {dataSavedMsg}
 					      <form id="artist-form" className="needs-validation">
 				      	  	<input type="hidden" name="id" value={this.getValue('id', 0)} />
 				      	  	<div className="form-group">
@@ -142,7 +192,8 @@ class ArtistForm extends React.Component {
 					      		<label>{Translator.trans('form.birthdate')} *:</label>
 					     		<input type="date" name="birthdate" 
 					     			className="form-control" value={this.getValue('birthdate')} 
-					     			placeholder={Translator.trans('form.birthdate_ph')} onChange={this.handleChange} max={moment().format('YYYY-MM-DD')} required />
+					     			placeholder={Translator.trans('form.birthdate_ph')} 
+					     			onChange={this.handleChange} max={moment().format('YYYY-MM-DD')} required />
 					     		<div className="valid-feedback">{Translator.trans('form.birthdate_required')}</div>
 					       	</div>
 					       	<div className="form-group">
@@ -161,14 +212,24 @@ class ArtistForm extends React.Component {
 					      </form>
 				      </div>
 				      <div className="modal-footer">
-					  	<button type="button" className="btn btn-secondary" onClick={this.handleClose}>Close</button>
-					  	<button type="button" className="btn btn-primary" onClick={this.handleSubmit}>Salva</button>
+					  	<button type="button" className="btn btn-secondary" onClick={this.handleClose}>{Translator.trans('close')}</button>
+					  	<button type="button" className="btn btn-primary" onClick={this.handleSubmit}>{Translator.trans('salva')}</button>
 					  </div>
-				  </div>
-				</div>
-		      </div>
+					</div>
 		    );
 		}
+
+
+		return (
+		      <div className="modal fade" id={this.props.formId} tabIndex="-1" role="dialog" aria-labelledby="artist" aria-hidden="true">
+		      	<div className="modal-dialog modal-lg">
+			      <div className="modal-content">
+						{content}
+				   </div>
+				</div>
+		      </div>
+		);
+
   	}	
 }
 

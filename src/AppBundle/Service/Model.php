@@ -16,8 +16,11 @@ class Model {
 	}
 	
 	public function getEntity($entityFullName, $id) {
-		$e = $this->em->getRepository($entityFullName)->findFullOneById($id);
-		if (!$e) {
+		try {
+			$e = $this->em->getRepository($entityFullName)->findFullOneById($id);
+		}
+		catch(\Exception $e) {
+			$this->logger->error($e->getFile() . ', linea ' . $e->getLine() . ', ' . $e->getMessage());
 			throw new \Exception('errors.record_not_found');
 		}
 		return $e;
@@ -28,9 +31,11 @@ class Model {
 	}
 	
 	public function saveEntity($entityFullName, $id, $data) {
-		die(var_dump($data));
-		$e = $this->em->getRepository($entityFullName)->save($id, $data);
-		if (!$e) {
+		try {
+			$e = $this->em->getRepository($entityFullName)->save($id, $data);
+		}
+		catch(\Exception $e) {
+			$this->logger->error($e->getFile() . ', linea ' . $e->getLine() . ', ' . $e->getMessage());
 			throw new \Exception('errors.record_not_saved');
 		}
 		return $e;

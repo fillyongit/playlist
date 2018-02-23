@@ -54,12 +54,24 @@ class Artist extends AbstractEntity
 		return $this->name;
 	}
 	
+	public function setName($value) {
+		$this->name = $value;
+	}
+	
 	public function getSurName() {
 		return $this->surName;
 	}
 	
+	public function setSurName($value) {
+		$this->surName = $value;
+	}
+	
 	public function getBirthDate() {
 		return $this->birthDate->format('Y-m-d');
+	}
+	
+	public function setBirthDate($value) {
+		$this->birthDate = new \DateTime($value);
 	}
 	
 	public function getLocaleBirthDate() {
@@ -68,5 +80,11 @@ class Artist extends AbstractEntity
 	
 	public function getRecords() {
 		return $this->records;
+	}
+	
+	public function addRecord(Record $record)
+	{
+		$record->addArtist($this); // synchronously updating inverse side
+		$this->records[] = $record;
 	}
 }
