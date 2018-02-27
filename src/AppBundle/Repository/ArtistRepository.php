@@ -1,10 +1,9 @@
 <?php
 namespace AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use AppBundle\Entity\Record;
 
-class ArtistRepository extends EntityRepository
+class ArtistRepository extends PlEntityRepository
 {
 	public function findFullOneById($id)
 	{
@@ -22,7 +21,7 @@ class ArtistRepository extends EntityRepository
 		}
 	}
 	
-	public function save($id, $data) {
+	public function save($id, array $data) {
 		try {
 			$em = $this->getEntityManager();
 			$artist = $this->find($id);

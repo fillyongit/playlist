@@ -76,10 +76,22 @@ class ArtistForm extends React.Component {
         if (!isValid) {
         	return;
         }
-console.log(this.state.data);
-  		// Chiama php service per salvataggio dati.
-		let data = new FormData($form.get(0));
 
+  		// Chiama php service per salvataggio dati.
+		// let data = new FormData($form.get(0));
+
+		let data = this.state.data;
+		data.token = this.props.token;
+
+		$.post(this.props.saveUrl, data, (result) => {
+				let error = result.error || null;
+	      		this.setState({
+	        		dataSaved: error ? false : true,
+	       			error: error
+	  			});
+  		});	
+		
+/*
 		fetch(this.props.saveUrl, {
 		  method: "POST",
 		  body: data,
@@ -104,6 +116,7 @@ console.log(this.state.data);
 	          });
 	        }
 		);
+*/
 
    	 	e.preventDefault();
   	}
@@ -186,7 +199,7 @@ console.log(this.state.data);
 					      		<label>{Translator.trans('form.surname')}:</label>
 					     		<input type="text" name="surname" 
 					     			className="form-control" value={this.getValue('surname')} 
-					     			placeholder={Translator.trans('form.surname_ph')} onChange={this.handleChange} />
+					     			onChange={this.handleChange} />
 					       	</div>
 				      	  	<div className="form-group">
 					      		<label>{Translator.trans('form.birthdate')} *:</label>

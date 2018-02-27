@@ -8,6 +8,9 @@ abstract class AbstractEntity implements PlEntityInterface, \JsonSerializable
 	 * Un oggetto restituito da Doctrine ha molti membri ed è molto più grande 
 	 * di quello che serve qui.
 	 * Restituisce i valori dei membri che hanno un corrispettivo getter.
+	 * L'implementazione di JsonSerializable con l'override del metodo jsonSerialize
+	 * garantisce che quando si chiama la funzione json su un oggetto PlEntityInterface
+	 * il json generato contiene solo i membri "esportabili".
 	 * 
 	 * @return array
 	 */

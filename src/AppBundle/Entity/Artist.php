@@ -74,6 +74,12 @@ class Artist extends AbstractEntity
 		$this->birthDate = new \DateTime($value);
 	}
 	
+	/**
+	 * Restituisce la data di nascita/formazione come un formato data localizzato.
+	 * LC_TIME viene impostato in AppBundle\EventSubscriber\LocalSubscriber.
+	 * 
+	 * @return string
+	 */
 	public function getLocaleBirthDate() {
 		return strftime('%x', $this->birthDate->getTimestamp());
 	}

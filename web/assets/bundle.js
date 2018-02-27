@@ -1911,7 +1911,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(155)("./" + name);
+            __webpack_require__(154)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4603,7 +4603,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(154)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(153)(module)))
 
 /***/ }),
 /* 1 */
@@ -4845,9 +4845,9 @@ module.exports = emptyFunction;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(141);
+  module.exports = __webpack_require__(140);
 } else {
-  module.exports = __webpack_require__(142);
+  module.exports = __webpack_require__(141);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -15401,9 +15401,9 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(144);
+  module.exports = __webpack_require__(143);
 } else {
-  module.exports = __webpack_require__(147);
+  module.exports = __webpack_require__(146);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -15425,7 +15425,7 @@ if (process.env.NODE_ENV === 'production') {
 if (process.env.NODE_ENV !== 'production') {
   var invariant = __webpack_require__(7);
   var warning = __webpack_require__(8);
-  var ReactPropTypesSecret = __webpack_require__(143);
+  var ReactPropTypesSecret = __webpack_require__(142);
   var loggedTypeFailures = {};
 }
 
@@ -15724,7 +15724,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(145);
+var isTextNode = __webpack_require__(144);
 
 /*eslint-disable no-bitwise */
 
@@ -27459,11 +27459,11 @@ var _reactDom = __webpack_require__(9);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _gridButtons = __webpack_require__(152);
+var _gridButtons = __webpack_require__(151);
 
 var _gridButtons2 = _interopRequireDefault(_gridButtons);
 
-__webpack_require__(156);
+__webpack_require__(155);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27481,7 +27481,8 @@ $('[data-react-id="grid-row-buttons"]').each(function (i, el) {
 	var rowId = $(el).attr('data-sql-id');
 	var entityUrl = $(el).attr('data-entity-url');
 	var saveUrl = $(el).attr('data-save-url');
-	_reactDom2.default.render(_react2.default.createElement(_gridButtons2.default, { id: rowId, entityUrl: entityUrl, saveUrl: saveUrl }), el);
+	var token = $(el).attr('data-token');
+	_reactDom2.default.render(_react2.default.createElement(_gridButtons2.default, { id: rowId, entityUrl: entityUrl, saveUrl: saveUrl, token: token }), el);
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
@@ -33859,8 +33860,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 140 */,
-/* 141 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33888,7 +33888,7 @@ isValidElement:K,version:"16.2.0",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_F
 
 
 /***/ }),
-/* 142 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35253,7 +35253,7 @@ module.exports = react;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 143 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35272,7 +35272,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 144 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35508,7 +35508,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
 
 
 /***/ }),
-/* 145 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35523,7 +35523,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
  * @typechecks
  */
 
-var isNode = __webpack_require__(146);
+var isNode = __webpack_require__(145);
 
 /**
  * @param {*} object The object to check.
@@ -35536,7 +35536,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 146 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35564,7 +35564,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 147 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35598,8 +35598,8 @@ var containsNode = __webpack_require__(15);
 var focusNode = __webpack_require__(16);
 var emptyObject = __webpack_require__(5);
 var checkPropTypes = __webpack_require__(10);
-var hyphenateStyleName = __webpack_require__(148);
-var camelizeStyleName = __webpack_require__(150);
+var hyphenateStyleName = __webpack_require__(147);
+var camelizeStyleName = __webpack_require__(149);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -50966,7 +50966,7 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 148 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50981,7 +50981,7 @@ module.exports = reactDom;
 
 
 
-var hyphenate = __webpack_require__(149);
+var hyphenate = __webpack_require__(148);
 
 var msPattern = /^ms-/;
 
@@ -51008,7 +51008,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 149 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51044,7 +51044,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 150 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51059,7 +51059,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(151);
+var camelize = __webpack_require__(150);
 
 var msPattern = /^-ms-/;
 
@@ -51087,7 +51087,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 151 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51122,7 +51122,7 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 152 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51142,7 +51142,7 @@ var _reactDom = __webpack_require__(9);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _artistForm = __webpack_require__(153);
+var _artistForm = __webpack_require__(152);
 
 var _artistForm2 = _interopRequireDefault(_artistForm);
 
@@ -51217,7 +51217,10 @@ var GridButtons = function (_React$Component) {
       var form = null;
       var formId = 'entity-form-' + this.props.id;
       if (this.state.isEditing) {
-        form = _react2.default.createElement(_artistForm2.default, { id: this.props.id, onFormClose: this.handleFormClose, formId: formId, url: this.props.entityUrl, saveUrl: this.props.saveUrl });
+        form = _react2.default.createElement(_artistForm2.default, { id: this.props.id,
+          onFormClose: this.handleFormClose,
+          formId: formId, url: this.props.entityUrl,
+          saveUrl: this.props.saveUrl, token: this.props.token });
       } else {
         form = null;
       }
@@ -51255,7 +51258,7 @@ var GridButtons = function (_React$Component) {
 exports.default = GridButtons;
 
 /***/ }),
-/* 153 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51371,32 +51374,47 @@ var ArtistForm = function (_React$Component) {
 			if (!isValid) {
 				return;
 			}
-			console.log(this.state.data);
-			// Chiama php service per salvataggio dati.
-			var data = new FormData($form.get(0));
 
-			fetch(this.props.saveUrl, {
-				method: "POST",
-				body: data,
-				credentials: 'same-origin'
-			}).then(function (res) {
-				return res.json();
-			}).then(function (result) {
+			// Chiama php service per salvataggio dati.
+			// let data = new FormData($form.get(0));
+
+			var data = this.state.data;
+			data.token = this.props.token;
+
+			$.post(this.props.saveUrl, data, function (result) {
 				var error = result.error || null;
 				_this3.setState({
 					dataSaved: error ? false : true,
 					error: error
 				});
-			},
-			// Note: it's important to handle errors here
-			// instead of a catch() block so that we don't swallow
-			// exceptions from actual bugs in components.
-			function (error) {
-				_this3.setState({
-					dataSaved: false,
-					error: error.message
-				});
 			});
+
+			/*
+   		fetch(this.props.saveUrl, {
+   		  method: "POST",
+   		  body: data,
+   		  credentials: 'same-origin'
+   		})
+   		.then(res => res.json())
+   		.then(
+   	        (result) => {
+   	          let error = result.error || null;
+   	          this.setState({
+   	            dataSaved: error ? false : true,
+   	            error: error
+   	          });
+   	        },
+   	        // Note: it's important to handle errors here
+   	        // instead of a catch() block so that we don't swallow
+   	        // exceptions from actual bugs in components.
+   	        (error) => {
+   	          this.setState({
+   	            dataSaved: false,
+   	            error: error.message
+   	          });
+   	        }
+   		);
+   */
 
 			e.preventDefault();
 		}
@@ -51526,7 +51544,7 @@ var ArtistForm = function (_React$Component) {
 								),
 								_react2.default.createElement('input', { type: 'text', name: 'surname',
 									className: 'form-control', value: this.getValue('surname'),
-									placeholder: Translator.trans('form.surname_ph'), onChange: this.handleChange })
+									onChange: this.handleChange })
 							),
 							_react2.default.createElement(
 								'div',
@@ -51621,7 +51639,7 @@ exports.default = ArtistForm;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 154 */
+/* 153 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -51649,7 +51667,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 155 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -51906,10 +51924,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 155;
+webpackContext.id = 154;
 
 /***/ }),
-/* 156 */
+/* 155 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

@@ -22,7 +22,8 @@
     	data-react-id="grid-row-buttons" 
     	data-sql-id="{{ row.id }}" 
     	data-entity-url="{{ path('entity_locale', {'what': 'artists', id: row.id}) }}" 
-    	data-save-url="{{ path('entity_save', {'what': 'artists', id: row.id}) }}">
+    	data-save-url="{{ path('entity_save', {'what': 'artists', id: row.id}) }}" 
+    	data-token="{{ csrf_token('artists-grid') }}">
     </div>
   </div>
   {% endfor  %}

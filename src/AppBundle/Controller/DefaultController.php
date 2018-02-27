@@ -73,7 +73,11 @@ class DefaultController extends Controller
     public function saveEntityAction(Request $request, Model $model, $what, $id = 0) {
     	try {
     		$data = $request->request->all();
-    		$data = $model->saveEntity(Artist::class, $id, $data);
+    		if ($this->isCsrfTokenValid('artists-grid', $data['token'])) {
+    			$data = $model->saveEntity(Artist::class, $id, $data);
+    		} else {
+    			throw \Exception($this->translator->trans('alert.security_csrf'));
+    		}
     	} catch (\Exception $e) {
     		$data['error'] = $this->translator->trans($e->getMessage());
     	}
