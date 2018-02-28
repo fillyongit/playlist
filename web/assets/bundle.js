@@ -51529,7 +51529,7 @@ var ArtistForm = function (_React$Component) {
 									placeholder: Translator.trans('form.name_ph'), onChange: this.handleChange, required: true }),
 								_react2.default.createElement(
 									'div',
-									{ className: 'valid-feedback' },
+									{ className: 'invalid-feedback' },
 									Translator.trans('form.name_required')
 								)
 							),
@@ -51561,7 +51561,7 @@ var ArtistForm = function (_React$Component) {
 									onChange: this.handleChange, max: (0, _moment2.default)().format('YYYY-MM-DD'), required: true }),
 								_react2.default.createElement(
 									'div',
-									{ className: 'valid-feedback' },
+									{ className: 'invalid-feedback' },
 									Translator.trans('form.birthdate_required')
 								)
 							),

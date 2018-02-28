@@ -22,7 +22,16 @@ abstract class PlEntityRepository extends EntityRepository {
 	 * @param $id
 	 * @param $data
 	 * @throws \Doctrine\ORM\ORMException
-	 * @return un oeggetto di tipo integer
+	 * @return integer
 	 */
 	abstract public function save($id, array $data);
+	
+	/**
+	 * Esegue una query che resotuisce l'entità corrente più le correlate.
+	 *
+	 * @abstract
+	 * @param $id
+	 * @return integer
+	 */
+	abstract public function delete($id);
 }

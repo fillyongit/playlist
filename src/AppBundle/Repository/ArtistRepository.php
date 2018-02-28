@@ -27,12 +27,14 @@ class ArtistRepository extends PlEntityRepository
 			$artist = $this->find($id);
 			$artist->setName($data['name']);
 			$artist->setBirthDate($data['birthdate']);
-
+			
+			$artist->getRecords()->clear();
+			
 			foreach($data['records'] as $idRecord) {
 				$record = $em->getRepository(Record::class)->find($idRecord);
-				if (!$artist->getRecords()->contains($record)) {
-					$artist->addRecord($record);
-				}
+				//if (!$artist->getRecords()->contains($record)) {
+				$artist->addRecord($record);
+				//}
 			}
 			
 			$em->flush();
@@ -41,5 +43,9 @@ class ArtistRepository extends PlEntityRepository
 		} catch (\Doctrine\ORM\ORMException $e) {
 			throw $e;
 		}
+	}
+	
+	public function delete($id) {
+		
 	}
 }

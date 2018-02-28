@@ -193,7 +193,7 @@ class ArtistForm extends React.Component {
 					     		<input type="text" name="name" 
 					     			className="form-control" value={this.getValue('name')} 
 					     			placeholder={Translator.trans('form.name_ph')} onChange={this.handleChange} required />
-					     		 <div className="valid-feedback">{Translator.trans('form.name_required')}</div>
+					     		 <div className="invalid-feedback">{Translator.trans('form.name_required')}</div>
 					       	</div>
 				      	  	<div className="form-group">
 					      		<label>{Translator.trans('form.surname')}:</label>
@@ -207,7 +207,7 @@ class ArtistForm extends React.Component {
 					     			className="form-control" value={this.getValue('birthdate')} 
 					     			placeholder={Translator.trans('form.birthdate_ph')} 
 					     			onChange={this.handleChange} max={moment().format('YYYY-MM-DD')} required />
-					     		<div className="valid-feedback">{Translator.trans('form.birthdate_required')}</div>
+					     		<div className="invalid-feedback">{Translator.trans('form.birthdate_required')}</div>
 					       	</div>
 					       	<div className="form-group">
 					       		<label htmlFor="artist-form-records">{Translator.trans('form.records')}</label>

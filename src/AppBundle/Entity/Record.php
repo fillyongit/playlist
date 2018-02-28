@@ -23,8 +23,7 @@ class Record extends AbstractEntity
 	protected $name;
 	
 	/**
-	 * @ORM\ManyToMany(targetEntity="Artist", inversedBy="records")
-	 * @ORM\JoinTable(name="artist_records")
+	 * @ORM\ManyToMany(targetEntity="Artist", mappedBy="records")
 	 */
 	protected $artists;
 	
@@ -46,6 +45,7 @@ class Record extends AbstractEntity
 	
 	public function addArtist(Artist $artist)
 	{
+		$artist->addRecord($this); // synchronously updating inverse side
 		$this->artists[] = $artist;
 	}
 }
