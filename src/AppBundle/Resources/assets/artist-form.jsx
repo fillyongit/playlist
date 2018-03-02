@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
+import LiveSearchListBoxField from './live-search-listbox-field.jsx';
 
 class ArtistForm extends React.Component {
 	constructor(props) {
@@ -54,6 +55,7 @@ class ArtistForm extends React.Component {
 	}
 
 	handleChange(e) {
+		console.log('change2');
 	 	let obj = this.state.data;
 	 	console.log(e.target.value);
 	 	obj[e.target.name] = e.target.value;
@@ -209,15 +211,9 @@ class ArtistForm extends React.Component {
 					     			onChange={this.handleChange} max={moment().format('YYYY-MM-DD')} required />
 					     		<div className="invalid-feedback">{Translator.trans('form.birthdate_required')}</div>
 					       	</div>
-					       	<div className="form-group">
-					       		<label htmlFor="artist-form-records">{Translator.trans('form.records')}</label>
-						       	<select name="records[]" id="artist-form-records" multiple={true} className="form-control"
-						       		value={this.getValue('records')} onChange={this.handleChange}>
-						       		{this.getValue('recordsEntities').map((record) => 
-							    		<option key={record.id} value={record.id}>{record.name}</option>
-							    	)}
-						       	</select>
-						    </div>
+					       	
+						    <LiveSearchListBoxField name="records" value={this.getValue('records')} data={this.getValue('recordsEntities')} onChange={this.handleChange}/>
+	
 					       	<div className="form-group">
 					      		<label>{Translator.trans('form.notes')}:</label>
 					      		<textarea name="notes" className="form-control" />

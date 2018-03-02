@@ -51282,6 +51282,10 @@ var _moment = __webpack_require__(0);
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _liveSearchListboxField = __webpack_require__(160);
+
+var _liveSearchListboxField2 = _interopRequireDefault(_liveSearchListboxField);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -51349,6 +51353,7 @@ var ArtistForm = function (_React$Component) {
 	}, {
 		key: 'handleChange',
 		value: function handleChange(e) {
+			console.log('change2');
 			var obj = this.state.data;
 			console.log(e.target.value);
 			obj[e.target.name] = e.target.value;
@@ -51565,27 +51570,7 @@ var ArtistForm = function (_React$Component) {
 									Translator.trans('form.birthdate_required')
 								)
 							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'form-group' },
-								_react2.default.createElement(
-									'label',
-									{ htmlFor: 'artist-form-records' },
-									Translator.trans('form.records')
-								),
-								_react2.default.createElement(
-									'select',
-									{ name: 'records[]', id: 'artist-form-records', multiple: true, className: 'form-control',
-										value: this.getValue('records'), onChange: this.handleChange },
-									this.getValue('recordsEntities').map(function (record) {
-										return _react2.default.createElement(
-											'option',
-											{ key: record.id, value: record.id },
-											record.name
-										);
-									})
-								)
-							),
+							_react2.default.createElement(_liveSearchListboxField2.default, { name: 'records', value: this.getValue('records'), data: this.getValue('recordsEntities'), onChange: this.handleChange }),
 							_react2.default.createElement(
 								'div',
 								{ className: 'form-group' },
@@ -51931,6 +51916,131 @@ webpackContext.id = 154;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 156 */,
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(9);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LiveSearchListBoxField = function (_React$Component) {
+	_inherits(LiveSearchListBoxField, _React$Component);
+
+	function LiveSearchListBoxField(props) {
+		_classCallCheck(this, LiveSearchListBoxField);
+
+		var _this = _possibleConstructorReturn(this, (LiveSearchListBoxField.__proto__ || Object.getPrototypeOf(LiveSearchListBoxField)).call(this, props));
+
+		_this.state = {
+			data: _this.props.data
+		};
+		return _this;
+	}
+
+	_createClass(LiveSearchListBoxField, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {}
+	}, {
+		key: 'getData',
+		value: function getData() {
+			var _this2 = this;
+
+			fetch(this.props.url, {
+				credentials: 'same-origin'
+			}).then(function (res) {
+				return res.json();
+			}).then(function (result) {
+				var error = result.error || null;
+				_this2.setState({
+					dataLoaded: error ? false : true,
+					data: result,
+					error: error
+				});
+			},
+			// Note: it's important to handle errors here
+			// instead of a catch() block so that we don't swallow
+			// exceptions from actual bugs in components.
+			function (error) {
+				_this2.setState({
+					dataLoaded: false,
+					error: error.message
+				});
+			});
+		}
+	}, {
+		key: 'handleSearchChange',
+		value: function handleSearchChange(e) {}
+	}, {
+		key: 'handleChange',
+		value: function handleChange(e) {
+			console.log('change');
+			this.props.onChange(e);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'form-group' },
+				_react2.default.createElement(
+					'label',
+					{ htmlFor: 'listbox-' + this.props.name },
+					Translator.trans('form.' + this.props.name)
+				),
+				_react2.default.createElement('br', null),
+				_react2.default.createElement('input', { type: 'text', name: 'search-box', onChange: this.handleSearchChange }),
+				_react2.default.createElement(
+					'select',
+					{
+						value: this.props.value,
+						name: this.props.name + '[]',
+						id: 'listbox-' + this.props.name,
+						multiple: true,
+						className: 'form-control',
+						onChange: this.handleChange },
+					this.state.data.map(function (value) {
+						return _react2.default.createElement(
+							'option',
+							{ key: value.id, value: value.id },
+							value.name
+						);
+					})
+				)
+			);
+		}
+	}]);
+
+	return LiveSearchListBoxField;
+}(_react2.default.Component);
+
+exports.default = LiveSearchListBoxField;
 
 /***/ })
 /******/ ]);
