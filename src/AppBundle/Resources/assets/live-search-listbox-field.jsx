@@ -41,11 +41,11 @@ class LiveSearchListBoxField extends React.Component {
 	}
 
 	handleSearchChange(e) {
-
+		// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
 	}
 
 	handleChange(e) {
-		console.log('change');
+		console.log('change1');
 		this.props.onChange(e);
 	}
 
