@@ -57,8 +57,23 @@ class ArtistForm extends React.Component {
 	handleChange(e) {
 		console.log('change2');
 	 	let obj = this.state.data;
+
 	 	console.log(e.target.value);
-	 	obj[e.target.name] = e.target.value;
+
+	 	let name = e.target.name;
+	 	let value = e.target.value;
+	 	/*if ($(e.target).attr('multiple')) {
+	 		// Gestisce i select multipli.
+	 		name = e.target.name.replace('[]', '');
+	 		// this.prevState
+	 		value = [];
+	 		Array.prototype.slice.call( e.target.selectedOIptions )
+	 		[...e.target.selectedOIptions].forEach(function(item, index) {
+	 			value[index] = item.value;
+	 		});
+	 	}
+	 	console.log(value);*/
+	 	obj[name] = value;
     	this.setState({
     		data: obj
     	});
@@ -212,6 +227,7 @@ class ArtistForm extends React.Component {
 					     		<div className="invalid-feedback">{Translator.trans('form.birthdate_required')}</div>
 					       	</div>
 					       	
+					       	{ console.log(this.state.data) }
 						    <LiveSearchListBoxField name="records" value={this.getValue('records')} data={this.getValue('recordsEntities')} onChange={this.handleChange}/>
 	
 					       	<div className="form-group">

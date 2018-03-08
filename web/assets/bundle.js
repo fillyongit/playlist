@@ -51355,8 +51355,23 @@ var ArtistForm = function (_React$Component) {
 		value: function handleChange(e) {
 			console.log('change2');
 			var obj = this.state.data;
+
 			console.log(e.target.value);
-			obj[e.target.name] = e.target.value;
+
+			var name = e.target.name;
+			var value = e.target.value;
+			/*if ($(e.target).attr('multiple')) {
+   	// Gestisce i select multipli.
+   	name = e.target.name.replace('[]', '');
+   	// this.prevState
+   	value = [];
+   	Array.prototype.slice.call( e.target.selectedOIptions )
+   	[...e.target.selectedOIptions].forEach(function(item, index) {
+   		value[index] = item.value;
+   	});
+   }
+   console.log(value);*/
+			obj[name] = value;
 			this.setState({
 				data: obj
 			});
@@ -51570,6 +51585,7 @@ var ArtistForm = function (_React$Component) {
 									Translator.trans('form.birthdate_required')
 								)
 							),
+							console.log(this.state.data),
 							_react2.default.createElement(_liveSearchListboxField2.default, { name: 'records', value: this.getValue('records'), data: this.getValue('recordsEntities'), onChange: this.handleChange }),
 							_react2.default.createElement(
 								'div',
@@ -51951,6 +51967,9 @@ var LiveSearchListBoxField = function (_React$Component) {
 		_this.state = {
 			data: _this.props.data
 		};
+
+		_this.handleChange = _this.handleChange.bind(_this);
+		_this.handleSearchChange = _this.handleSearchChange.bind(_this);
 		return _this;
 	}
 

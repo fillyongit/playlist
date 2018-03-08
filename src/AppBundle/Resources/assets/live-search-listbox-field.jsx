@@ -9,6 +9,9 @@ class LiveSearchListBoxField extends React.Component {
 		this.state = {
 			data: this.props.data
 		};
+
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSearchChange = this.handleSearchChange.bind(this);
 	}
 
 	componentDidMount() {
