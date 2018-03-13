@@ -57,22 +57,20 @@ class ArtistForm extends React.Component {
 	handleChange(e) {
 		console.log('change2');
 	 	let obj = this.state.data;
-
-	 	console.log(e.target.value);
-
 	 	let name = e.target.name;
 	 	let value = e.target.value;
-	 	/*if ($(e.target).attr('multiple')) {
+	 	if ($(e.target).attr('multiple')) {
 	 		// Gestisce i select multipli.
 	 		name = e.target.name.replace('[]', '');
 	 		// this.prevState
 	 		value = [];
-	 		Array.prototype.slice.call( e.target.selectedOIptions )
-	 		[...e.target.selectedOIptions].forEach(function(item, index) {
+	 		// Array.prototype.slice.call(e.target.selectedOptions)
+	 		[...e.target.selectedOptions].forEach(function(item, index) {
+	 			console.log(item);
 	 			value[index] = item.value;
 	 		});
 	 	}
-	 	console.log(value);*/
+	 	console.log(value);
 	 	obj[name] = value;
     	this.setState({
     		data: obj

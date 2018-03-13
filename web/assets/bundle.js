@@ -51288,6 +51288,8 @@ var _liveSearchListboxField2 = _interopRequireDefault(_liveSearchListboxField);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -51355,22 +51357,20 @@ var ArtistForm = function (_React$Component) {
 		value: function handleChange(e) {
 			console.log('change2');
 			var obj = this.state.data;
-
-			console.log(e.target.value);
-
 			var name = e.target.name;
 			var value = e.target.value;
-			/*if ($(e.target).attr('multiple')) {
-   	// Gestisce i select multipli.
-   	name = e.target.name.replace('[]', '');
-   	// this.prevState
-   	value = [];
-   	Array.prototype.slice.call( e.target.selectedOIptions )
-   	[...e.target.selectedOIptions].forEach(function(item, index) {
-   		value[index] = item.value;
-   	});
-   }
-   console.log(value);*/
+			if ($(e.target).attr('multiple')) {
+				// Gestisce i select multipli.
+				name = e.target.name.replace('[]', '');
+				// this.prevState
+				value = [];
+				// Array.prototype.slice.call(e.target.selectedOptions)
+				[].concat(_toConsumableArray(e.target.selectedOptions)).forEach(function (item, index) {
+					console.log(item);
+					value[index] = item.value;
+				});
+			}
+			console.log(value);
 			obj[name] = value;
 			this.setState({
 				data: obj
