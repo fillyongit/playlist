@@ -51355,7 +51355,6 @@ var ArtistForm = function (_React$Component) {
 	}, {
 		key: 'handleChange',
 		value: function handleChange(e) {
-			console.log('change2');
 			var obj = this.state.data;
 			var name = e.target.name;
 			var value = e.target.value;
@@ -51366,7 +51365,7 @@ var ArtistForm = function (_React$Component) {
 				value = [];
 				// Array.prototype.slice.call(e.target.selectedOptions)
 				[].concat(_toConsumableArray(e.target.selectedOptions)).forEach(function (item, index) {
-					console.log(item);
+					// console.log(item);
 					value[index] = item.value;
 				});
 			}
@@ -52006,12 +52005,22 @@ var LiveSearchListBoxField = function (_React$Component) {
 	}, {
 		key: 'handleSearchChange',
 		value: function handleSearchChange(e) {
+			var _this3 = this;
+
 			// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
+			fetch('', {
+				credentials: 'same-origin'
+			}).then(function (res) {
+				return res.json();
+			}).then(function (result) {
+				_this3.setState({
+					data: result
+				});
+			});
 		}
 	}, {
 		key: 'handleChange',
 		value: function handleChange(e) {
-			console.log('change1');
 			this.props.onChange(e);
 		}
 	}, {

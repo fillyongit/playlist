@@ -35,3 +35,7 @@ entity_locale:
 entity_save:
     path:      /save/{what}/{id}
     defaults:  { _controller: AppBundle:Default:saveEntity, what: '%app.list_default%', id: '0' }
+    
+live_search:
+    path:      /livesearch/{what}
+    defaults:  { _controller: AppBundle:Default:liveSearch }

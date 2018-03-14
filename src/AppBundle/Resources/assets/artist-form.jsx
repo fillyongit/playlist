@@ -55,7 +55,6 @@ class ArtistForm extends React.Component {
 	}
 
 	handleChange(e) {
-		console.log('change2');
 	 	let obj = this.state.data;
 	 	let name = e.target.name;
 	 	let value = e.target.value;
@@ -66,7 +65,7 @@ class ArtistForm extends React.Component {
 	 		value = [];
 	 		// Array.prototype.slice.call(e.target.selectedOptions)
 	 		[...e.target.selectedOptions].forEach(function(item, index) {
-	 			console.log(item);
+	 			// console.log(item);
 	 			value[index] = item.value;
 	 		});
 	 	}
