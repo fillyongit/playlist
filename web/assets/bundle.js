@@ -52008,7 +52008,7 @@ var LiveSearchListBoxField = function (_React$Component) {
 			var _this3 = this;
 
 			// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
-			fetch('', {
+			fetch(albumLiveSearchUrl, {
 				credentials: 'same-origin'
 			}).then(function (res) {
 				return res.json();
