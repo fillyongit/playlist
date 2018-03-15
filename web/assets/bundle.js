@@ -27479,10 +27479,8 @@ $(document).ready(function () {
 
 $('[data-react-id="grid-row-buttons"]').each(function (i, el) {
 	var rowId = $(el).attr('data-sql-id');
-	var entityUrl = $(el).attr('data-entity-url');
-	var saveUrl = $(el).attr('data-save-url');
 	var token = $(el).attr('data-token');
-	_reactDom2.default.render(_react2.default.createElement(_gridButtons2.default, { id: rowId, entityUrl: entityUrl, saveUrl: saveUrl, token: token }), el);
+	_reactDom2.default.render(_react2.default.createElement(_gridButtons2.default, { id: rowId, token: token }), el);
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
@@ -51219,8 +51217,7 @@ var GridButtons = function (_React$Component) {
       if (this.state.isEditing) {
         form = _react2.default.createElement(_artistForm2.default, { id: this.props.id,
           onFormClose: this.handleFormClose,
-          formId: formId, url: this.props.entityUrl,
-          saveUrl: this.props.saveUrl, token: this.props.token });
+          formId: formId, token: this.props.token });
       } else {
         form = null;
       }
@@ -51330,7 +51327,7 @@ var ArtistForm = function (_React$Component) {
 
 			// Chiama php service per prendere i dati.
 			// this.props.id
-			fetch(this.props.url, {
+			fetch(entityUrl.replace(/__what__/, 'artists').replace(/__id__/, this.props.id), {
 				credentials: 'same-origin'
 			}).then(function (res) {
 				return res.json();
@@ -51400,7 +51397,7 @@ var ArtistForm = function (_React$Component) {
 			var data = this.state.data;
 			data.token = this.props.token;
 
-			$.post(this.props.saveUrl, data, function (result) {
+			$.post(saveUrl.replace(/__what__/, 'artists').replace(/__id__/, this.props.id), data, function (result) {
 				var error = result.error || null;
 				_this3.setState({
 					dataSaved: error ? false : true,
@@ -52008,11 +52005,12 @@ var LiveSearchListBoxField = function (_React$Component) {
 			var _this3 = this;
 
 			// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
-			fetch(albumLiveSearchUrl, {
+			fetch(liveSearchUrl.replace(/__what__/, this.props.name), {
 				credentials: 'same-origin'
 			}).then(function (res) {
 				return res.json();
 			}).then(function (result) {
+				console.log(result);
 				_this3.setState({
 					data: result
 				});

@@ -60,8 +60,7 @@ class GridButtons extends React.Component {
     if (this.state.isEditing) {
       form = <ArtistForm id={this.props.id}
        onFormClose={this.handleFormClose} 
-       formId={formId} url={this.props.entityUrl} 
-       saveUrl={this.props.saveUrl} token={this.props.token}  />;
+       formId={formId} token={this.props.token}  />;
     } else {
       form = null;
     }

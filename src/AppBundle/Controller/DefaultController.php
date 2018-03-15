@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Artist;
+use AppBundle\Entity\Record;
 use AppBundle\Service\Model;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,6 +82,11 @@ class DefaultController extends Controller
     	} catch (\Exception $e) {
     		$data['error'] = $this->translator->trans($e->getMessage());
     	}
+    	return $this->json($data);
+    }
+    
+    public function liveSearchAction(Request $request, Model $model, $what) {
+    	$data = $model->getCollection(Record::class);
     	return $this->json($data);
     }
 }

@@ -13,8 +13,6 @@ $(document).ready(function() { console.log('jQuery works!'); } );
 
 $('[data-react-id="grid-row-buttons"]').each(function(i, el){
 	let rowId = $(el).attr('data-sql-id');
-	let entityUrl = $(el).attr('data-entity-url');
-	let saveUrl = $(el).attr('data-save-url');
 	let token = $(el).attr('data-token');
-	ReactDOM.render(<GridButtons id={rowId} entityUrl={entityUrl} saveUrl={saveUrl} token={token} />, el);
+	ReactDOM.render(<GridButtons id={rowId} token={token} />, el);
 });
