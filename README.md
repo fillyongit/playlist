@@ -22,3 +22,7 @@ Nel src\AppBundle\EventSubscriber\LocaleSubscriber viene fatto il setlocale(LC_T
 Uso la libreria javascript moment per formattare le date lato client.
 
 Fare un live search per il campo Records in artisti e viceversa nel form dei record quando ci sarà.
+
+Implementare aggiungi artista/record.
+
+Aggiungere campo immagine in scheda artista e record.
