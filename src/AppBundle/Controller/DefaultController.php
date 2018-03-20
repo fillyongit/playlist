@@ -40,9 +40,9 @@ class DefaultController extends Controller
     }
     
     public function listAction(Request $request, 
+    		Model $model,
     		$what = 'songs', 
-    		$howMany = 100,
-    		Model $model)
+    		$howMany = 100)
     {
     	$this->logger->info('listAction -> ' . $what . ' ' . $howMany);
 
@@ -62,7 +62,7 @@ class DefaultController extends Controller
     	]);
     }
     
-    public function entityAction($what, $id, Model $model) {
+    public function entityAction(Model $model, $what, $id) {
     	try {
     		$data = $model->getEntity(Artist::class, $id);
     	} catch (\Exception $e) {
@@ -74,7 +74,7 @@ class DefaultController extends Controller
     public function saveEntityAction(Request $request, Model $model, $what, $id = 0) {
     	try {
     		$data = $request->request->all();
-    		if ($this->isCsrfTokenValid('artists-grid', $data['token'])) {
+    		if ($this->isCsrfTokenValid('grid', $data['token'])) {
     			$data = $model->saveEntity(Artist::class, $id, $data);
     		} else {
     			throw \Exception($this->translator->trans('alert.security_csrf'));
@@ -85,8 +85,12 @@ class DefaultController extends Controller
     	return $this->json($data);
     }
     
-    public function liveSearchAction(Request $request, Model $model, $what) {
+    public function liveSearchAction(Request $request, Model $model, $what, $searchedWords = '') {
+    	
+    	die($searchedWords);
     	$data = $model->getCollection(Record::class);
+    	
+    	
     	return $this->json($data);
     }
 }

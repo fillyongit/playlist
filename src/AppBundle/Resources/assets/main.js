@@ -5,9 +5,14 @@ import 'bootstrap';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GridButtons from './grid-buttons.jsx';
 
-import './index.scss'; // Entry point css. Dentro importa gli stili di boostrap.
+// Entry point css. Dentro importa gli stili di boostrap.
+// Viene prima dell'importazione dei componenenti in modo
+// che eventuali css specific dei componenenti possano
+// sovrascrivere quelli del css base.
+import './index.scss';
+
+import GridButtons from './components/grid-buttons.jsx';
 
 $(document).ready(function() { console.log('jQuery works!'); } );
 

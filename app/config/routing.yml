@@ -37,5 +37,5 @@ entity_save:
     defaults:  { _controller: AppBundle:Default:saveEntity, what: '%app.list_default%', id: '0' }
     
 live_search:
-    path:      /livesearch/{what}
+    path:      /livesearch/{what}/{search}
     defaults:  { _controller: AppBundle:Default:liveSearch }

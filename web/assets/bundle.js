@@ -1911,7 +1911,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(154)("./" + name);
+            __webpack_require__(155)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4603,7 +4603,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(153)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(154)(module)))
 
 /***/ }),
 /* 1 */
@@ -27459,15 +27459,18 @@ var _reactDom = __webpack_require__(6);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _gridButtons = __webpack_require__(151);
+__webpack_require__(151);
+
+var _gridButtons = __webpack_require__(152);
 
 var _gridButtons2 = _interopRequireDefault(_gridButtons);
-
-__webpack_require__(156);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Entry point css. Dentro importa gli stili di boostrap.
+// Viene prima dell'importazione dei componenenti in modo
+// che eventuali css specific dei componenenti possano
+// sovrascrivere quelli del css base.
 
 // si potrebbero anche importare in plugin indivuidualmente come:
 // import 'bootstrap/js/dist/util';
@@ -51121,6 +51124,12 @@ module.exports = camelize;
 
 /***/ }),
 /* 151 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51140,7 +51149,7 @@ var _reactDom = __webpack_require__(6);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _artistForm = __webpack_require__(152);
+var _artistForm = __webpack_require__(153);
 
 var _artistForm2 = _interopRequireDefault(_artistForm);
 
@@ -51255,7 +51264,7 @@ var GridButtons = function (_React$Component) {
 exports.default = GridButtons;
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51279,9 +51288,11 @@ var _moment = __webpack_require__(0);
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _liveSearchListboxField = __webpack_require__(155);
+var _liveSearchListboxField = __webpack_require__(156);
 
 var _liveSearchListboxField2 = _interopRequireDefault(_liveSearchListboxField);
+
+__webpack_require__(157);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51636,7 +51647,7 @@ exports.default = ArtistForm;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -51664,7 +51675,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -51921,10 +51932,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 154;
+webpackContext.id = 155;
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52005,7 +52016,7 @@ var LiveSearchListBoxField = function (_React$Component) {
 			var _this3 = this;
 
 			// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
-			fetch(liveSearchUrl.replace(/__what__/, this.props.name), {
+			fetch(liveSearchUrl.replace(/__what__/, this.props.name) + '/' + e.target.value, {
 				credentials: 'same-origin'
 			}).then(function (res) {
 				return res.json();
@@ -52061,7 +52072,7 @@ var LiveSearchListBoxField = function (_React$Component) {
 exports.default = LiveSearchListBoxField;
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
