@@ -51343,12 +51343,15 @@ var ArtistForm = function (_React$Component) {
 			}).then(function (res) {
 				return res.json();
 			}).then(function (result) {
-				var error = result.error || null;
-				_this2.setState({
-					dataLoaded: error ? false : true,
-					data: result,
-					error: error
-				});
+				if (!result.error) {
+					_this2.setState({
+						dataLoaded: true,
+						data: result,
+						error: null
+					});
+				} else {
+					throw new Error(result.error);
+				}
 			},
 			// Note: it's important to handle errors here
 			// instead of a catch() block so that we don't swallow
@@ -51409,11 +51412,17 @@ var ArtistForm = function (_React$Component) {
 			data.token = this.props.token;
 
 			$.post(saveUrl.replace(/__what__/, 'artists').replace(/__id__/, this.props.id), data, function (result) {
-				var error = result.error || null;
-				_this3.setState({
-					dataSaved: error ? false : true,
-					error: error
-				});
+				if (!result.error) {
+					_this3.setState({
+						dataSaved: true,
+						error: null
+					});
+				} else {
+					_this3.setState({
+						dataSaved: false,
+						error: result.error
+					});
+				}
 			});
 
 			/*
@@ -51593,7 +51602,13 @@ var ArtistForm = function (_React$Component) {
 								)
 							),
 							console.log(this.state.data),
-							_react2.default.createElement(_liveSearchListboxField2.default, { name: 'records', value: this.getValue('records'), data: this.getValue('recordsEntities'), onChange: this.handleChange }),
+							_react2.default.createElement(_liveSearchListboxField2.default, {
+								name: 'records',
+								value: this.getValue('records'),
+								data: this.getValue('recordsEntities'),
+								onChange: this.handleChange,
+								token: this.props.token
+							}),
 							_react2.default.createElement(
 								'div',
 								{ className: 'form-group' },
@@ -51972,7 +51987,10 @@ var LiveSearchListBoxField = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (LiveSearchListBoxField.__proto__ || Object.getPrototypeOf(LiveSearchListBoxField)).call(this, props));
 
 		_this.state = {
-			data: _this.props.data
+			data: _this.props.data,
+			searchFullfilled: false,
+			tick: 0,
+			error: null
 		};
 
 		_this.handleChange = _this.handleChange.bind(_this);
@@ -51984,48 +52002,41 @@ var LiveSearchListBoxField = function (_React$Component) {
 		key: 'componentDidMount',
 		value: function componentDidMount() {}
 	}, {
-		key: 'getData',
-		value: function getData() {
-			var _this2 = this;
-
-			fetch(this.props.url, {
-				credentials: 'same-origin'
-			}).then(function (res) {
-				return res.json();
-			}).then(function (result) {
-				var error = result.error || null;
-				_this2.setState({
-					dataLoaded: error ? false : true,
-					data: result,
-					error: error
-				});
-			},
-			// Note: it's important to handle errors here
-			// instead of a catch() block so that we don't swallow
-			// exceptions from actual bugs in components.
-			function (error) {
-				_this2.setState({
-					dataLoaded: false,
-					error: error.message
-				});
-			});
-		}
-	}, {
 		key: 'handleSearchChange',
 		value: function handleSearchChange(e) {
-			var _this3 = this;
+			var _this2 = this;
 
-			// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
-			fetch(liveSearchUrl.replace(/__what__/, this.props.name) + '/' + e.target.value, {
-				credentials: 'same-origin'
-			}).then(function (res) {
-				return res.json();
-			}).then(function (result) {
-				console.log(result);
-				_this3.setState({
-					data: result
+			if (this.state.searchFullfilled) {
+
+				var data = new FormData();
+				data.append("search", e.target.value);
+				console.log(this.props.token);
+				data.append("token", this.props.token);
+
+				// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
+				fetch(liveSearchUrl.replace(/__what__/, this.props.name), {
+					credentials: 'same-origin',
+					method: 'POST',
+					body: data
+				}).then(function (res) {
+					return res.json();
+				}).then(function (result) {
+					console.log(result);
+					if (!result.error) {
+						_this2.setState({
+							searchFullfilled: true,
+							data: result
+						});
+					} else {
+						throw new Error(result.error);
+					}
+				}, function (error) {
+					_this2.setState({
+						searchFullfilled: true,
+						error: error.message
+					});
 				});
-			});
+			}
 		}
 	}, {
 		key: 'handleChange',

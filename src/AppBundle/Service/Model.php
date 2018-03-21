@@ -26,8 +26,12 @@ class Model {
 		return $e;
 	}
 	
-	public function getCollection($entityFullName) {
-		return $this->em->getRepository($entityFullName)->findAll();
+	public function getCollection($entityFullName, $search = array()) {
+		if (empty($search)) {
+			return $this->em->getRepository($entityFullName)->findAll();
+		} else {
+			
+		}
 	}
 	
 	public function saveEntity($entityFullName, $id, $data) {

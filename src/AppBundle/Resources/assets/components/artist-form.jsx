@@ -37,12 +37,15 @@ class ArtistForm extends React.Component {
 		.then(res => res.json())
 		.then(
 	        (result) => {
-	          let error = result.error || null;
-	          this.setState({
-	            dataLoaded: error ? false : true,
-	            data: result,
-	            error: error
-	          });
+	        	if (!result.error) {
+		          	this.setState({
+		            	dataLoaded: true,
+		            	data: result,
+		            	error: null
+	          		});
+	      	  	} else {
+					throw new Error(result.error);
+	      	  	}
 	        },
 	        // Note: it's important to handle errors here
 	        // instead of a catch() block so that we don't swallow
@@ -100,11 +103,17 @@ class ArtistForm extends React.Component {
 		data.token = this.props.token;
 
 		$.post(saveUrl.replace(/__what__/, 'artists').replace(/__id__/, this.props.id), data, (result) => {
-				let error = result.error || null;
-	      		this.setState({
-	        		dataSaved: error ? false : true,
-	       			error: error
-	  			});
+			if (!result.error) {
+      			this.setState({
+        			dataSaved: true,
+        			error: null
+  				});
+      		} else {
+      			this.setState({
+        			dataSaved: false,
+        			error: result.error
+  				});
+      		}
   		});	
 		
 /*
@@ -227,7 +236,13 @@ class ArtistForm extends React.Component {
 					       	</div>
 					       	
 					       	{ console.log(this.state.data) }
-						    <LiveSearchListBoxField name="records" value={this.getValue('records')} data={this.getValue('recordsEntities')} onChange={this.handleChange}/>
+						    <LiveSearchListBoxField 
+							    name="records" 
+							    value={this.getValue('records')} 
+							    data={this.getValue('recordsEntities')} 
+							    onChange={this.handleChange}
+							    token={this.props.token} 
+							/>
 	
 					       	<div className="form-group">
 					      		<label>{Translator.trans('form.notes')}:</label>

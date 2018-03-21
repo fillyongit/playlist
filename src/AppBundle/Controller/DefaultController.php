@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Artist;
 use AppBundle\Entity\Record;
 use AppBundle\Service\Model;
+use AppBundle\Exception\CsrfException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Psr\Log\LoggerInterface;
@@ -77,7 +78,7 @@ class DefaultController extends Controller
     		if ($this->isCsrfTokenValid('grid', $data['token'])) {
     			$data = $model->saveEntity(Artist::class, $id, $data);
     		} else {
-    			throw \Exception($this->translator->trans('alert.security_csrf'));
+    			throw  new CsrfException($this->translator);
     		}
     	} catch (\Exception $e) {
     		$data['error'] = $this->translator->trans($e->getMessage());
@@ -85,11 +86,14 @@ class DefaultController extends Controller
     	return $this->json($data);
     }
     
-    public function liveSearchAction(Request $request, Model $model, $what, $searchedWords = '') {
-    	
-    	die($searchedWords);
-    	$data = $model->getCollection(Record::class);
-    	
+    public function liveSearchAction(Request $request, Model $model, $what) {
+    	$data = array();
+    	if ($this->isCsrfTokenValid('grid', $request->request->get('token'))) {
+    		die(var_dump($request->request->get('search')));
+    		$data = $model->getCollection(Record::class);
+    	} else {
+    		throw new CsrfException($this->translator);
+    	}
     	
     	return $this->json($data);
     }

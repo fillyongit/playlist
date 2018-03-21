@@ -7,7 +7,10 @@ class LiveSearchListBoxField extends React.Component {
 	    super(props);
 
 		this.state = {
-			data: this.props.data
+			data: this.props.data,
+			searchFullfilled: false,
+			tick: 0,
+	    	error: null
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -17,47 +20,42 @@ class LiveSearchListBoxField extends React.Component {
 	componentDidMount() {
 	}
 
-	getData() {
-		fetch(this.props.url, {
-		  credentials: 'same-origin'
-		})
-		.then(res => res.json())
-		.then(
-	        (result) => {
-	          let error = result.error || null;
-	          this.setState({
-	            dataLoaded: error ? false : true,
-	            data: result,
-	            error: error
-	          });
-	        },
-	        // Note: it's important to handle errors here
-	        // instead of a catch() block so that we don't swallow
-	        // exceptions from actual bugs in components.
-	        (error) => {
-	          this.setState({
-	            dataLoaded: false,
-	            error: error.message
-	          });
-	        }
-	    );
-	}
-
 	handleSearchChange(e) {
-		// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
-		fetch(liveSearchUrl.replace(/__what__/, this.props.name) + '/' + e.target.value, {
-		  credentials: 'same-origin'
-		})
-		.then(res => res.json())
-		.then(
-			(result) => {
-				console.log(result);
-				this.setState({
-					data: result
-				});
-			}
-		);
 
+		if (this.state.searchFullfilled) {
+
+			var data = new FormData();
+			data.append("search", e.target.value);
+			console.log(this.props.token);
+			data.append("token", this.props.token);
+
+			// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
+			fetch(liveSearchUrl.replace(/__what__/, this.props.name), {
+			  credentials: 'same-origin',
+			  method: 'POST',
+			  body: data
+			})
+			.then(res => res.json())
+			.then(
+				(result) => {
+					console.log(result);
+					if (!result.error) {
+						this.setState({
+							searchFullfilled: true,
+							data: result
+						});
+					} else {
+						throw new Error(result.error);
+					}
+				},
+				(error) => {
+		          this.setState({
+		            searchFullfilled: true,
+		            error: error.message
+		          });
+		        }
+			);
+		}
 	}
 
 	handleChange(e) {
