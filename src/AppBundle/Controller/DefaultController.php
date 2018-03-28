@@ -48,7 +48,7 @@ class DefaultController extends Controller
     	$this->logger->info('listAction -> ' . $what . ' ' . $howMany);
 
     	// print $this->getParameter('database_name');
-    	
+
     	$data = $model->getCollection(Artist::class);
 
     	// replace this example code with whatever you need

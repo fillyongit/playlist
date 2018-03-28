@@ -9,7 +9,6 @@ class LiveSearchListBoxField extends React.Component {
 		this.state = {
 			data: this.props.data,
 			searchFullfilled: false,
-			tick: 0,
 	    	error: null
 		};
 
@@ -20,40 +19,48 @@ class LiveSearchListBoxField extends React.Component {
 	componentDidMount() {
 	}
 
+	doSearch(value) {
+		var data = new FormData();
+		data.append("search", value);
+		data.append("token", this.props.token);
+
+		// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
+		fetch(liveSearchUrl.replace(/__what__/, this.props.name), {
+		  credentials: 'same-origin',
+		  method: 'POST',
+		  body: data
+		})
+		.then(res => res.json())
+		.then(
+			(result) => {
+				console.log(result);
+				if (!result.error) {
+					this.setState({
+						searchFullfilled: true,
+						data: result
+					});
+				} else {
+					throw new Error(result.error);
+				}
+			},
+			(error) => {
+	          this.setState({
+	            searchFullfilled: true,
+	            error: error.message
+	          });
+	        }
+		);
+	}
+
 	handleSearchChange(e) {
-
-		if (this.state.searchFullfilled) {
-
-			var data = new FormData();
-			data.append("search", e.target.value);
-			console.log(this.props.token);
-			data.append("token", this.props.token);
-
-			// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
-			fetch(liveSearchUrl.replace(/__what__/, this.props.name), {
-			  credentials: 'same-origin',
-			  method: 'POST',
-			  body: data
-			})
-			.then(res => res.json())
-			.then(
-				(result) => {
-					console.log(result);
-					if (!result.error) {
-						this.setState({
-							searchFullfilled: true,
-							data: result
-						});
-					} else {
-						throw new Error(result.error);
-					}
+		if (e.target.value.length > 1) {
+			const value = e.target.value;
+			clearTimeout(this.searchTimeout);
+			this.searchTimeout = setTimeout(
+				() => {
+					this.doSearch(value);
 				},
-				(error) => {
-		          this.setState({
-		            searchFullfilled: true,
-		            error: error.message
-		          });
-		        }
+				2000
 			);
 		}
 	}

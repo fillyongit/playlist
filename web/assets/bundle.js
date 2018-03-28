@@ -51989,7 +51989,6 @@ var LiveSearchListBoxField = function (_React$Component) {
 		_this.state = {
 			data: _this.props.data,
 			searchFullfilled: false,
-			tick: 0,
 			error: null
 		};
 
@@ -52002,40 +52001,49 @@ var LiveSearchListBoxField = function (_React$Component) {
 		key: 'componentDidMount',
 		value: function componentDidMount() {}
 	}, {
-		key: 'handleSearchChange',
-		value: function handleSearchChange(e) {
+		key: 'doSearch',
+		value: function doSearch(value) {
 			var _this2 = this;
 
-			if (this.state.searchFullfilled) {
+			var data = new FormData();
+			data.append("search", value);
+			data.append("token", this.props.token);
 
-				var data = new FormData();
-				data.append("search", e.target.value);
-				console.log(this.props.token);
-				data.append("token", this.props.token);
-
-				// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
-				fetch(liveSearchUrl.replace(/__what__/, this.props.name), {
-					credentials: 'same-origin',
-					method: 'POST',
-					body: data
-				}).then(function (res) {
-					return res.json();
-				}).then(function (result) {
-					console.log(result);
-					if (!result.error) {
-						_this2.setState({
-							searchFullfilled: true,
-							data: result
-						});
-					} else {
-						throw new Error(result.error);
-					}
-				}, function (error) {
+			// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
+			fetch(liveSearchUrl.replace(/__what__/, this.props.name), {
+				credentials: 'same-origin',
+				method: 'POST',
+				body: data
+			}).then(function (res) {
+				return res.json();
+			}).then(function (result) {
+				console.log(result);
+				if (!result.error) {
 					_this2.setState({
 						searchFullfilled: true,
-						error: error.message
+						data: result
 					});
+				} else {
+					throw new Error(result.error);
+				}
+			}, function (error) {
+				_this2.setState({
+					searchFullfilled: true,
+					error: error.message
 				});
+			});
+		}
+	}, {
+		key: 'handleSearchChange',
+		value: function handleSearchChange(e) {
+			var _this3 = this;
+
+			if (e.target.value.length > 1) {
+				var value = e.target.value;
+				clearTimeout(this.searchTimeout);
+				this.searchTimeout = setTimeout(function () {
+					_this3.doSearch(value);
+				}, 2000);
 			}
 		}
 	}, {
