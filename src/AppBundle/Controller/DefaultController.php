@@ -2,8 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Artist;
-use AppBundle\Entity\Record;
 use AppBundle\Service\Model;
 use AppBundle\Exception\CsrfException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -49,7 +47,7 @@ class DefaultController extends Controller
 
     	// print $this->getParameter('database_name');
 
-    	$data = $model->getCollection(Artist::class);
+    	$data = $model->getCollection('AppBundle:Artist');
 
     	// replace this example code with whatever you need
     	return $this->render('default/'.$what.'.html.twig', [
@@ -65,7 +63,7 @@ class DefaultController extends Controller
     
     public function entityAction(Model $model, $what, $id) {
     	try {
-    		$data = $model->getEntity(Artist::class, $id);
+    		$data = $model->getEntity('AppBundle:Artist', $id);
     	} catch (\Exception $e) {
     		$data['error'] = $this->translator->trans($e->getMessage());
     	}
@@ -76,7 +74,7 @@ class DefaultController extends Controller
     	try {
     		$data = $request->request->all();
     		if ($this->isCsrfTokenValid('grid', $data['token'])) {
-    			$data = $model->saveEntity(Artist::class, $id, $data);
+    			$data = $model->saveEntity('AppBundle:Artist', $id, $data);
     		} else {
     			throw  new CsrfException($this->translator);
     		}
@@ -89,8 +87,7 @@ class DefaultController extends Controller
     public function liveSearchAction(Request $request, Model $model, $what) {
     	$data = array();
     	if ($this->isCsrfTokenValid('grid', $request->request->get('token'))) {
-    		die(var_dump($request->request->get('search')));
-    		$data = $model->getCollection(Record::class);
+    		$data = $model->getCollection('AppBundle:Record', $request->request->get('search'));
     	} else {
     		throw new CsrfException($this->translator);
     	}

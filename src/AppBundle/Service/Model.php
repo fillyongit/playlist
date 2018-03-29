@@ -26,11 +26,11 @@ class Model {
 		return $e;
 	}
 	
-	public function getCollection($entityFullName, $search = array()) {
-		if (empty($search)) {
+	public function getCollection($entityFullName, $search = '') {
+		if (!$search) {
 			return $this->em->getRepository($entityFullName)->findAll();
 		} else {
-			
+			return $this->em->getRepository($entityFullName)->findByCriteria($search);
 		}
 	}
 	

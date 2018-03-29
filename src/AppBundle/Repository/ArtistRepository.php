@@ -5,8 +5,12 @@ use AppBundle\Entity\Record;
 
 class ArtistRepository extends PlEntityRepository
 {
-	public function findFullOneById($id)
-	{
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * @see \AppBundle\Repository\PlEntityRepository::findFullOneById()
+	 */
+	public function findFullOneById($id) {
 		$query = $this->getEntityManager()
 		->createQuery(
 			'SELECT a, r FROM AppBundle:Artist a
@@ -21,6 +25,11 @@ class ArtistRepository extends PlEntityRepository
 		}
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * @see \AppBundle\Repository\PlEntityRepository::save()
+	 */
 	public function save($id, array $data) {
 		try {
 			$em = $this->getEntityManager();
@@ -45,7 +54,24 @@ class ArtistRepository extends PlEntityRepository
 		}
 	}
 	
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * @see \AppBundle\Repository\PlEntityRepository::delete()
+	 */
 	public function delete($id) {
 		
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @see \AppBundle\Repository\PlEntityRepository::findByCriteria()
+	 */
+	public function findByCriteria($value) {
+		$criteria = array(
+			'name' => $value,
+			'surname' => $value
+		);
+		return $this->findBy($criteria);
 	}
 }
