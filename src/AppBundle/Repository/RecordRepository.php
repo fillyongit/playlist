@@ -35,6 +35,11 @@ class RecordRepository extends PlEntityRepository
 	 * @see \AppBundle\Repository\PlEntityRepository::findByCriteria()
 	 */
 	public function findByCriteria($value) {
-		return $this->findByName($value);
+		$query = $this->getEntityManager()->createQuery(
+				'SELECT r FROM AppBundle:Record r 
+       			 WHERE r.name LIKE :name'
+		)->setParameter('name', '%' . $value . '%');
+
+		return $query->getResult();
 	}
 }

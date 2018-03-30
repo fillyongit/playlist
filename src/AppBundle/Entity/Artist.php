@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ArtistRepository")
  * @ORM\Table(name="artist")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Artist extends AbstractEntity
 {
@@ -26,6 +27,12 @@ class Artist extends AbstractEntity
 	 * @ORM\Column(type="string", name="surname", length=100, nullable=TRUE)
 	 */
 	protected $surName;
+	
+	/**
+	 * @ORM\Column(type="datetime", name="created_at", nullable=FALSE)
+	 */
+	protected $createdAt;
+	
 	
 	/**
 	 * @ORM\Column(type="text", nullable=TRUE)
@@ -92,5 +99,13 @@ class Artist extends AbstractEntity
 	public function addRecord(Record $record)
 	{
 		$this->records[] = $record;
+	}
+	
+	/**
+	 * @ORM\PrePersist
+	 */
+	public function setCreatedAtValue()
+	{
+		$this->createdAt = new \DateTime();
 	}
 }

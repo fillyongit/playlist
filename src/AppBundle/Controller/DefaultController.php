@@ -87,11 +87,17 @@ class DefaultController extends Controller
     public function liveSearchAction(Request $request, Model $model, $what) {
     	$data = array();
     	if ($this->isCsrfTokenValid('grid', $request->request->get('token'))) {
-    		$data = $model->getCollection('AppBundle:Record', $request->request->get('search'));
+    		$collection = $model->getCollection('AppBundle:Record', $request->request->get('search'));
+    		foreach($collection as $row) {
+    			// Ogni $row è un oggetto di tipo AbstractEntity 
+    			// che implementa l'interfaccia JsonSerializable e implementa
+    			// il metodo jsonSerialize.
+    			$data[] = json_encode($row);
+    		}
     	} else {
     		throw new CsrfException($this->translator);
     	}
-    	
+
     	return $this->json($data);
     }
 }
