@@ -235,7 +235,6 @@ class ArtistForm extends React.Component {
 					     		<div className="invalid-feedback">{Translator.trans('form.birthdate_required')}</div>
 					       	</div>
 					       	
-					       	{ console.log(this.state.data) }
 						    <LiveSearchListBoxField 
 							    name="records" 
 							    value={this.getValue('records')} 

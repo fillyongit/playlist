@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class DefaultController extends Controller
 {
@@ -19,9 +20,9 @@ class DefaultController extends Controller
 	private $session;
 	
 	public function __construct(
-			LoggerInterface $logger,
-			TranslatorInterface $translator,
-			SessionInterface $session
+		LoggerInterface $logger,
+		TranslatorInterface $translator,
+		SessionInterface $session
 	) {
 		$this->logger = $logger;
 		$this->translator = $translator;
@@ -92,7 +93,7 @@ class DefaultController extends Controller
     			// Ogni $row è un oggetto di tipo AbstractEntity 
     			// che implementa l'interfaccia JsonSerializable e implementa
     			// il metodo jsonSerialize.
-    			$data[] = json_encode($row);
+    		    $data[] = json_encode($row);
     		}
     	} else {
     		throw new CsrfException($this->translator);

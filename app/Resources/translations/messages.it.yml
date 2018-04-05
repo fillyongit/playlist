@@ -9,6 +9,10 @@ artists: Artisti
 playlist: Playlist
 playlists: Playlist
 
+grid:
+    name: Nome
+    birthdate: Data di nascita/formazione
+
 form:
     name: Nome
 

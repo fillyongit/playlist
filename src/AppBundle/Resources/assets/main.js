@@ -1,5 +1,8 @@
 // var moment = require('moment');
 import 'bootstrap';
+//import './fontawesome-5.0.9/svg-with-js/js/fontawesome-all.min.js';
+import './fontawesome-5.0.9/web-fonts-with-css/css/fontawesome-all.min.css';
+
 // si potrebbero anche importare in plugin indivuidualmente come:
 // import 'bootstrap/js/dist/util';
 

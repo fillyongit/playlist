@@ -6,6 +6,8 @@ class LiveSearchListBoxField extends React.Component {
 	constructor(props) {
 	    super(props);
 
+		// console.log(this.props.data);
+
 		this.state = {
 			data: this.props.data,
 			searchFullfilled: false,
@@ -33,11 +35,14 @@ class LiveSearchListBoxField extends React.Component {
 		.then(res => res.json())
 		.then(
 			(result) => {
-				console.log(result);
 				if (!result.error) {
+					let data = [];
+					for (let i in result) {
+						data[i] = JSON.parse(result[i]);
+					}
 					this.setState({
 						searchFullfilled: true,
-						data: result
+						data: data
 					});
 				} else {
 					throw new Error(result.error);
@@ -82,7 +87,7 @@ class LiveSearchListBoxField extends React.Component {
 					multiple={true} 
 					className="form-control"
 		       		onChange={this.handleChange}>
-		       		{this.state.data.map((value) => 
+		       		{this.state.data.map((value) =>
 			    		<option key={value.id} value={value.id}>{value.name}</option>
 			    	)}
 		       	</select>
