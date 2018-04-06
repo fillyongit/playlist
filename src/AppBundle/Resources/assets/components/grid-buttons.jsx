@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ArtistForm from './artist-form.jsx';
 
+import './grid-buttons.scss';
+
 class GridButtons extends React.Component {
  
   constructor(props) {
@@ -67,10 +69,9 @@ class GridButtons extends React.Component {
 
 		return (
       <div>
-        <div style={{display:'flex'}}>
-          <i className="fas fa-pencil-alt fa-lg " onClick={this.editArtist}></i>
+        <div className="grid-buttons">
+          <i className="fas fa-pencil-alt fa-lg" onClick={this.editArtist}></i>
           <i className="fas fa-trash fa-lg"></i>
-
           <i className={'fas ' + this.state.isPlayButtonToggleOn ? 'fa-headphone' : 'fa-play' + ' fa-lg'} 
             onClick={this.playArtistList} 
             style={{color:this.state.isPlayButtonToggleOn?'green':'#000'}}></i>

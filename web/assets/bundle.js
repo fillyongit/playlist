@@ -51158,6 +51158,8 @@ var _artistForm = __webpack_require__(153);
 
 var _artistForm2 = _interopRequireDefault(_artistForm);
 
+__webpack_require__(185);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -51241,8 +51243,8 @@ var GridButtons = function (_React$Component) {
         null,
         _react2.default.createElement(
           'div',
-          { style: { display: 'flex' } },
-          _react2.default.createElement('i', { className: 'fas fa-pencil-alt fa-lg ', onClick: this.editArtist }),
+          { className: 'grid-buttons' },
+          _react2.default.createElement('i', { className: 'fas fa-pencil-alt fa-lg', onClick: this.editArtist }),
           _react2.default.createElement('i', { className: 'fas fa-trash fa-lg' }),
           _react2.default.createElement('i', { className:  true ? 'fa-headphone' : 'fa-play' + ' fa-lg',
             onClick: this.playArtistList,
@@ -51287,8 +51289,6 @@ var _liveSearchListboxField = __webpack_require__(156);
 
 var _liveSearchListboxField2 = _interopRequireDefault(_liveSearchListboxField);
 
-__webpack_require__(157);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -51298,6 +51298,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import './artist-form.scss';
 
 var ArtistForm = function (_React$Component) {
 	_inherits(ArtistForm, _React$Component);
@@ -52090,12 +52092,7 @@ var LiveSearchListBoxField = function (_React$Component) {
 exports.default = LiveSearchListBoxField;
 
 /***/ }),
-/* 157 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
+/* 157 */,
 /* 158 */,
 /* 159 */
 /***/ (function(module, exports) {
@@ -52804,6 +52801,12 @@ module.exports = __webpack_require__.p + "images/fa-solid-900.ttf";
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/fa-solid-900.svg";
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

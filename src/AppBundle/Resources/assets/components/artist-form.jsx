@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import moment from 'moment';
 import LiveSearchListBoxField from './live-search-listbox-field.jsx';
 
-import './style.scss';
+// import './artist-form.scss';
 
 class ArtistForm extends React.Component {
 	constructor(props) {
