@@ -67,12 +67,13 @@ class GridButtons extends React.Component {
       form = null;
     }
 
+    const playlistClassName = 'fas ' + (this.state.isPlayButtonToggleOn ? 'fa-headphone' : 'fa-play') + ' fa-lg';
 		return (
       <div>
         <div className="grid-buttons">
           <i className="fas fa-pencil-alt fa-lg" onClick={this.editArtist}></i>
           <i className="fas fa-trash fa-lg"></i>
-          <i className={'fas ' + this.state.isPlayButtonToggleOn ? 'fa-headphone' : 'fa-play' + ' fa-lg'} 
+          <i className={playlistClassName} 
             onClick={this.playArtistList} 
             style={{color:this.state.isPlayButtonToggleOn?'green':'#000'}}></i>
         </div>

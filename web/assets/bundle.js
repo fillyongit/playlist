@@ -51238,6 +51238,7 @@ var GridButtons = function (_React$Component) {
         form = null;
       }
 
+      var playlistClassName = 'fas ' + (this.state.isPlayButtonToggleOn ? 'fa-headphone' : 'fa-play') + ' fa-lg';
       return _react2.default.createElement(
         'div',
         null,
@@ -51246,7 +51247,7 @@ var GridButtons = function (_React$Component) {
           { className: 'grid-buttons' },
           _react2.default.createElement('i', { className: 'fas fa-pencil-alt fa-lg', onClick: this.editArtist }),
           _react2.default.createElement('i', { className: 'fas fa-trash fa-lg' }),
-          _react2.default.createElement('i', { className:  true ? 'fa-headphone' : 'fa-play' + ' fa-lg',
+          _react2.default.createElement('i', { className: playlistClassName,
             onClick: this.playArtistList,
             style: { color: this.state.isPlayButtonToggleOn ? 'green' : '#000' } })
         ),
