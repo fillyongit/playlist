@@ -4,6 +4,10 @@ app:
 
 _bazinga_jstranslation:
     resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
+
+login:
+    path:      /login
+    defaults:  { _controller: AppBundle:Security:login }
     
 homepage:
     path:      /
