@@ -51,7 +51,7 @@ class DefaultController extends Controller
         
         $user = $this->getUser();
         
-        return new Response('<html><body>Admin page! Hi ' . $user->getFirstName() . '</body></html>');
+        return new Response('<html><body>Admin page! Hi ' . $user->getUsername() . '</body></html>');
     }
     
     public function listAction(Request $request, 

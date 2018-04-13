@@ -1,8 +1,8 @@
 <?php
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Record;
+use Doctrine\ORM\EntityRepository;
 
-class UserRepository {
+class UserRepository extends EntityRepository {
     
 }
