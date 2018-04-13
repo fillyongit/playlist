@@ -5,6 +5,7 @@ use AppBundle\Service\Model;
 use AppBundle\Exception\CsrfException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -36,6 +37,21 @@ class DefaultController extends Controller
         return $this->render('default/home.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR
         ]);
+    }
+    
+    public function adminAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        // $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
+//         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+//             throw $this->createAccessDeniedException();
+//         }
+        
+        $user = $this->getUser();
+        
+        return new Response('<html><body>Admin page! Hi ' . $user->getFirstName() . '</body></html>');
     }
     
     public function listAction(Request $request, 

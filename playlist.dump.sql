@@ -1,6 +1,6 @@
--- MySQL dump 10.13  Distrib 5.7.14, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: playlist
+-- Host: 127.0.0.1    Database: playlist
 -- ------------------------------------------------------
 -- Server version	5.7.14
 
@@ -28,6 +28,7 @@ CREATE TABLE `artist` (
   `surname` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `birthdate` datetime DEFAULT NULL,
   `notes` longtext COLLATE utf8mb4_unicode_ci,
+  `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,7 +39,7 @@ CREATE TABLE `artist` (
 
 LOCK TABLES `artist` WRITE;
 /*!40000 ALTER TABLE `artist` DISABLE KEYS */;
-INSERT INTO `artist` VALUES (1,'Pearl Jam',NULL,'1991-07-01 00:00:00',NULL),(2,'Beatles',NULL,'1960-02-01 00:00:00',NULL);
+INSERT INTO `artist` (`id`, `name`, `surname`, `birthdate`, `notes`, `created_at`) VALUES (1,'Pearl Jam',NULL,'1991-07-02 00:00:00',NULL,'0000-00-00 00:00:00'),(2,'Beatles',NULL,'1960-02-01 00:00:00',NULL,'0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `artist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,7 +67,7 @@ CREATE TABLE `artist_records` (
 
 LOCK TABLES `artist_records` WRITE;
 /*!40000 ALTER TABLE `artist_records` DISABLE KEYS */;
-INSERT INTO `artist_records` VALUES (1,1),(1,2),(2,3);
+INSERT INTO `artist_records` (`artist_id`, `record_id`) VALUES (1,1),(1,2),(2,3);
 /*!40000 ALTER TABLE `artist_records` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,9 +91,46 @@ CREATE TABLE `record` (
 
 LOCK TABLES `record` WRITE;
 /*!40000 ALTER TABLE `record` DISABLE KEYS */;
-INSERT INTO `record` VALUES (1,'Ten'),(2,'Versus'),(3,'The White Album');
+INSERT INTO `record` (`id`, `name`) VALUES (1,'Ten'),(2,'Versus'),(3,'The White Album');
 /*!40000 ALTER TABLE `record` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(254) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_1483A5E9F85E0677` (`username`),
+  UNIQUE KEY `UNIQ_1483A5E9E7927C74` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `is_active`) VALUES (1,'admin','$2y$13$d/IL4/UaXmkRuGXGLJ7ZweK7th3mZ9FPGR1em3URqLnljszITQWae','a@example.com',1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'playlist'
+--
+
+--
+-- Dumping routines for database 'playlist'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -103,4 +141,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-21 11:14:08
+-- Dump completed on 2018-04-13 16:38:23
