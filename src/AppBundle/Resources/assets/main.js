@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom';
 
 // Entry point css. Dentro importa gli stili di boostrap.
 // Viene prima dell'importazione dei componenenti in modo
-// che eventuali css specific dei componenenti possano
+// che eventuali css specifici dei componenenti possano
 // sovrascrivere quelli del css base.
 import './index.scss';
 

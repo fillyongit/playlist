@@ -8,6 +8,9 @@ _bazinga_jstranslation:
 login:
     path:      /login
     defaults:  { _controller: AppBundle:Security:login }
+ 
+logout:
+    path:      /logout
     
 user_registration:
     path:      /register

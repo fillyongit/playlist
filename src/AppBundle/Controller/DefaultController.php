@@ -35,7 +35,8 @@ class DefaultController extends Controller
     {
         // replace this example code with whatever you need
         return $this->render('default/home.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            // 'entries' => array(array('key' => '1', 'value' => '<script>alert("sto cercando di fregarti.");</script>ciao'))
         ]);
     }
     
@@ -49,9 +50,11 @@ class DefaultController extends Controller
 //             throw $this->createAccessDeniedException();
 //         }
         
-        $user = $this->getUser();
+        // $user = $this->getUser();
         
-        return new Response('<html><body>Admin page! Hi ' . $user->getUsername() . '</body></html>');
+        return $this->render('default/admin.html.twig');
+        
+        // return new Response('<html><body>Admin page! Hi ' . $user->getUsername() . '</body></html>');
     }
     
     public function listAction(Request $request, 
