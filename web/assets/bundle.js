@@ -51948,7 +51948,7 @@ var GridButtons = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'grid-buttons' },
-          _react2.default.createElement('i', { className: 'btn fas fa-pencil-alt fa-lg', onClick: this.editArtist }),
+          app.userIsEditor ? _react2.default.createElement('i', { className: 'btn fas fa-pencil-alt fa-lg', onClick: this.editArtist }) : '',
           _react2.default.createElement('i', { className: 'btn fas fa-trash fa-lg' }),
           _react2.default.createElement('i', { className: 'btn fas ' + (this.state.isPlayButtonToggleOn ? 'fa-headphones' : 'fa-play') + ' fa-lg',
             onClick: this.playArtistList })
@@ -52038,7 +52038,7 @@ var ArtistForm = function (_React$Component) {
 
 			// Chiama php service per prendere i dati.
 			// this.props.id
-			fetch(entityUrl.replace(/__what__/, 'artists').replace(/__id__/, this.props.id), {
+			fetch(app.entityUrl.replace(/__what__/, 'artists').replace(/__id__/, this.props.id), {
 				credentials: 'same-origin'
 			}).then(function (res) {
 				return res.json();
@@ -52111,7 +52111,7 @@ var ArtistForm = function (_React$Component) {
 			var data = this.state.data;
 			data.token = this.props.token;
 
-			$.post(saveUrl.replace(/__what__/, 'artists').replace(/__id__/, this.props.id), data, function (result) {
+			$.post(app.saveUrl.replace(/__what__/, 'artists').replace(/__id__/, this.props.id), data, function (result) {
 				if (!result.error) {
 					_this3.setState({
 						dataSaved: true,
@@ -52711,7 +52711,7 @@ var LiveSearchListBoxField = function (_React$Component) {
 			data.append("token", this.props.token);
 
 			// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
-			fetch(liveSearchUrl.replace(/__what__/, this.props.name), {
+			fetch(app.liveSearchUrl.replace(/__what__/, this.props.name), {
 				credentials: 'same-origin',
 				method: 'POST',
 				body: data

@@ -6,10 +6,10 @@ use AppBundle\Exception\CsrfException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Psr\Log\LoggerInterface;
 
 class DefaultController extends Controller
 {
@@ -44,7 +44,7 @@ class DefaultController extends Controller
     {
         // replace this example code with whatever you need
         // $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         
 //         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
 //             throw $this->createAccessDeniedException();

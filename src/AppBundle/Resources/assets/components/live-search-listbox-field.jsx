@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
 class LiveSearchListBoxField extends React.Component {
 	constructor(props) {
 	    super(props);
@@ -27,7 +26,7 @@ class LiveSearchListBoxField extends React.Component {
 		data.append("token", this.props.token);
 
 		// Chiama servizio per ottenere i valori sulla base del valore di ricerca.
-		fetch(liveSearchUrl.replace(/__what__/, this.props.name), {
+		fetch(app.liveSearchUrl.replace(/__what__/, this.props.name), {
 		  credentials: 'same-origin',
 		  method: 'POST',
 		  body: data

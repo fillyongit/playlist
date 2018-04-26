@@ -31,7 +31,7 @@ class ArtistForm extends React.Component {
 
 		// Chiama php service per prendere i dati.
 		// this.props.id
-		fetch(entityUrl.replace(/__what__/, 'artists').replace(/__id__/, this.props.id), {
+		fetch(app.entityUrl.replace(/__what__/, 'artists').replace(/__id__/, this.props.id), {
 		  credentials: 'same-origin'  
 		})
 		.then(res => res.json())
@@ -102,7 +102,7 @@ class ArtistForm extends React.Component {
 		let data = this.state.data;
 		data.token = this.props.token;
 
-		$.post(saveUrl.replace(/__what__/, 'artists').replace(/__id__/, this.props.id), data, (result) => {
+		$.post(app.saveUrl.replace(/__what__/, 'artists').replace(/__id__/, this.props.id), data, (result) => {
 			if (!result.error) {
       			this.setState({
         			dataSaved: true,

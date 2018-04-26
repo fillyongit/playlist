@@ -1,6 +1,10 @@
  <script>
- 	 // I placeholder __[qualcosa]__ verranno sostituiti nei jsx.
-	let liveSearchUrl = "{{ path('live_search', {'what': '__what__' }) }}";
-	let entityUrl = "{{ path('entity_locale', {'what': '__what__', id: '__id__'}) }}";
-	let saveUrl = "{{ path('entity_save', {'what': '__what__', id: '__id__'}) }}" ;
+ 	// I placeholder __[qualcosa]__ verranno sostituiti nei jsx.
+ 	var app = {};
+	app.liveSearchUrl = "{{ path('live_search', {'what': '__what__' }) }}";
+	app.entityUrl = "{{ path('entity_locale', {'what': '__what__', id: '__id__'}) }}";
+	app.saveUrl = "{{ path('entity_save', {'what': '__what__', id: '__id__'}) }}" ;
+	app.userIsAuthenticated = "{{ is_granted('IS_AUTHENTICATED_REMEMBERED') }}";
+	app.userIsAdmin = "{{ is_granted('ROLE_ADMIN') }}";
+	app.userIsEditor = "{{ is_granted('ROLE_EDIT') }}";
  </script>

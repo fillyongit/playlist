@@ -70,7 +70,7 @@ class GridButtons extends React.Component {
 		return (
       <div>
         <div className="grid-buttons">
-          <i className="btn fas fa-pencil-alt fa-lg" onClick={this.editArtist}></i>
+          {app.userIsEditor ? (<i className="btn fas fa-pencil-alt fa-lg" onClick={this.editArtist}></i>) : ''}
           <i className="btn fas fa-trash fa-lg"></i>
           <i className={'btn fas ' + (this.state.isPlayButtonToggleOn ? 'fa-headphones' : 'fa-play') + ' fa-lg'} 
             onClick={this.playArtistList}></i>
