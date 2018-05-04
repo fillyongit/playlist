@@ -1,7 +1,16 @@
 // var moment = require('moment');
 import 'bootstrap';
 //import './fontawesome-5.0.9/svg-with-js/js/fontawesome-all.min.js';
-import './fontawesome-5.0.9/web-fonts-with-css/css/fontawesome-all.min.css';
+//import './fontawesome-5.0.9/web-fonts-with-css/css/fontawesome-all.min.css';
+
+import fontawesome from '@fortawesome/fontawesome'
+import solid from '@fortawesome/fontawesome-free-solid'
+
+// Add the icon to the library so you can use it in your page
+fontawesome.library.add(solid.faPencilAlt);
+fontawesome.library.add(solid.faTrash);
+fontawesome.library.add(solid.faHeadphones);
+fontawesome.library.add(solid.faPlay);
 
 // si potrebbero anche importare in plugin indivuidualmente come:
 // import 'bootstrap/js/dist/util';
