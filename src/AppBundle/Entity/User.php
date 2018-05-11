@@ -88,6 +88,11 @@ class User implements AdvancedUserInterface, \Serializable
         return null;
     }
     
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\UserInterface::getPassword()
+     */
     public function getPassword()
     {
         return $this->password;
@@ -98,30 +103,60 @@ class User implements AdvancedUserInterface, \Serializable
         $this->password = $password;
     }
     
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\UserInterface::getRoles()
+     */
     public function getRoles()
     {
         return array('ROLE_ADMIN');
     }
     
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\UserInterface::eraseCredentials()
+     */
     public function eraseCredentials()
     {
     }
     
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\AdvancedUserInterface::isAccountNonExpired()
+     */
     public function isAccountNonExpired()
     {
         return true;
     }
     
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\AdvancedUserInterface::isAccountNonLocked()
+     */
     public function isAccountNonLocked()
     {
         return true;
     }
     
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\AdvancedUserInterface::isCredentialsNonExpired()
+     */
     public function isCredentialsNonExpired()
     {
         return true;
     }
     
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\AdvancedUserInterface::isEnabled()
+     */
     public function isEnabled()
     {
         return $this->isActive;
