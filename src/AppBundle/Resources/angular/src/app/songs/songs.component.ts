@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Song } from '../song';
 import { SONGS } from '../mock-songs';
+// import { app } from '../namespace';
 
 @Component({
   selector: 'app-songs',
@@ -9,11 +10,21 @@ import { SONGS } from '../mock-songs';
 })
 export class SongsComponent implements OnInit {
 
-  songs: SONGS;
+  	songs = SONGS;
 
-  constructor() { }
+  	selectedSong: Song;
 
-  ngOnInit() {
-  }
+  	constructor() { 
+  	}
+
+  	ngOnInit() {
+  		//console.log(SONGS);
+  		// this.songs = SONGS;
+  		console.log(app.userIsAuthenticated);
+  	}
+
+  	onSelect(song: Song): void {
+  		this.selectedSong = song;
+	}
 
 }

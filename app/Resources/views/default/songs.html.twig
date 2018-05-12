@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{{ title }}
+
+	<app-root></app-root>	
+{% endblock %}
+
+{% block javascripts %}
+{{ include('js.html.twig') }}
+<script type="text/javascript" src="{{ asset('angular/runtime.js') }}"></script><script type="text/javascript" src="{{ asset('angular/polyfills.js') }}"></script><script type="text/javascript" src="{{ asset('angular/styles.js') }}"></script><script type="text/javascript" src="{{ asset('angular/vendor.js') }}"></script><script type="text/javascript" src="{{ asset('angular/main.js') }}"></script>
+{% endblock %}
